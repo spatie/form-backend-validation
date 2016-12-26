@@ -1,7 +1,7 @@
 {
-  "name": ":package_name",
-  "version": "0.1.0",
-  "description": ":package_description",
+  "name": "vue-form-backend-validation",
+  "version": "0.0.1",
+  "description": "An easy way to validate forms using logic form the back end",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/:github_organization/:package_name.git"
+    "url": "https://github.com/spatie/vue-form-backend-validation.git"
   },
   "keywords": [
     "spatie"
   ],
-  "author": ":author_name",
+  "author": "Freek Van der Herten",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/:github_organization/:package_name/issues"
+    "url": "https://github.com/spatie/vue-form-backend-validation/issues"
   },
-  "homepage": "https://github.com/:github_organization/:package_name",
+  "homepage": "https://github.com/spatie/vue-form-backend-validation",
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
@@ -29,5 +29,8 @@
     "eslint": "^3.7.1",
     "eslint-config-spatie": "^1.1.0",
     "jest": "^16.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.15.3"
   }
 }
