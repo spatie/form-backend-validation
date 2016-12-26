@@ -35,13 +35,13 @@ This is an example of a fully configured form that could be built up in a `Blade
 ```html
 <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
     <div>
-        <label for="name" class="label">Name:</label>
+        <label for="name">Name:</label>
         <input type="text" name="name" v-model="form.name"> 
-        <span class="help is-danger" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
+        <span v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
     </div>
 
     <div>
-        <label for="text" class="label">Text:</label>
+        <label for="text">Text:</label>
         <input type="text" name="text" v-model="form.text">
        <span v-if="form.errors.has('text')" v-text="form.errors.get('text')"></span>
     </div>
