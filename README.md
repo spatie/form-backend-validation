@@ -1,4 +1,4 @@
-# vue-form-backend-validation
+# An easy way to validate forms using back end logic
 
 [![Latest Version on NPM](https://img.shields.io/npm/v/vue-form-backend-validation.svg?style=flat-square)](https://npmjs.com/package/vue-form-backend-validation)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
