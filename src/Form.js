@@ -76,3 +76,5 @@ class Form {
         this.errors.record(error.response.data);
     }
 }
+
+export default Form;

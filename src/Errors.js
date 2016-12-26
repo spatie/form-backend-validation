@@ -62,3 +62,5 @@ class Errors {
         this.errors = {};
     }
 }
+
+export default Errors;
