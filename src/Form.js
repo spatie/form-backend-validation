@@ -50,7 +50,7 @@ class Form {
      * @param {string} url
      */
     submit(requestType, url) {
-        axios[requestType](url, this.data())
+        return axios[requestType](url, this.data())
             .then(this.onSuccess.bind(this))
             .catch(this.onFail.bind(this));
     }
