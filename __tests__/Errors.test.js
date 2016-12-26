@@ -39,4 +39,16 @@ describe('Errors', () => {
 
         assert.isFalse(errors.any());
     });
+
+    it('can clear a specific error', () => {
+        errors.record({
+            'first_name': ['Value is required'],
+            'last_name': ['Value is required'],
+        })
+
+        errors.clear('first_name');
+
+        assert.isFalse(errors.has('first_name'));
+        assert.isTrue(errors.has('last_name'));
+    });
 });

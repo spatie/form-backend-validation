@@ -62,8 +62,6 @@ class Form {
      * @param {object} response
      */
     onSuccess(response) {
-        alert(response.data.message); // temporary
-
         this.reset();
     }
 
