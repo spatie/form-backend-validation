@@ -6,7 +6,6 @@ class Errors {
         this.errors = {};
     }
 
-
     /**
      * Determine if an errors exists for the given field.
      *
@@ -16,14 +15,12 @@ class Errors {
         return this.errors.hasOwnProperty(field);
     }
 
-
     /**
      * Determine if we have any errors.
      */
     any() {
         return Object.keys(this.errors).length > 0;
     }
-
 
     /**
      * Retrieve the error message for a field.
@@ -36,7 +33,6 @@ class Errors {
         }
     }
 
-
     /**
      * Record the new errors.
      *
@@ -45,7 +41,6 @@ class Errors {
     record(errors) {
         this.errors = errors;
     }
-
 
     /**
      * Clear one or all error fields.

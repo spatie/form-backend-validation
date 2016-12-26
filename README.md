@@ -4,8 +4,13 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/spatie/vue-form-backend-validation/master.svg?style=flat-square)](https://travis-ci.org/spatie/vue-form-backend-validation)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+Wouldn't it be great if you could just use your back end to validate forms on the front end? This package provides a `Form` class does exactly that. It can post itself to a configured endpoint and manage errors. The class meant to be used in a `Vue` component and works out of the box with a Laravel back end.
+
+Take a look at the [usage section]('#usage') to view a detailed example on how to use it.
+
+The base code of this package is taken from the [Object-Oriented Forms lesson](https://laracasts.com/series/learn-vue-2-step-by-step/episodes/19) in the [Vue 2.0 series](https://laracasts.com/series/learn-vue-2-step-by-step/) on [Laracasts](https://laracasts.com/).
+
+When submitted this form will be posted to `/newsItems`. 
 
 ## Postcardware
 
@@ -25,13 +30,50 @@ $ yarn add vue-form-backend-validation
 
 ## Usage
 
-```js
-const myPackage = require('my-package');
+This is an example of a fully configured form that could be built up in a `Blade` view.
 
-myPackage.doStuff();
+```html
+<form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+    <div>
+        <label for="name" class="label">Name:</label>
+        <input type="text" name="name" v-model="form.name"> 
+        <span class="help is-danger" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
+    </div>
+
+    <div>
+        <label for="text" class="label">Text:</label>
+        <input type="text" name="text" v-model="form.text">
+       <span v-if="form.errors.has('text')" v-text="form.errors.get('text')"></span>
+    </div>
+
+    <div>
+        <button :disabled="form.errors.any()">Create news item</button>
+    </div>
+</form>
 ```
 
-## Change log
+This is an example of a `Vue` component that uses the provided `Form` class. 
+
+```js
+new Vue({
+    el: '#app',
+
+    data: {
+        form: new Form({
+            name: '',
+            text: ''
+        })
+    },
+
+    methods: {
+        onSubmit() {
+            this.form.submit('post', '/newsItems');
+        }
+    }
+});
+```
+
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
