@@ -8,9 +8,7 @@ Wouldn't it be great if you could just use your back end to validate forms on th
 
 Take a look at the [usage section]('#usage') to view a detailed example on how to use it.
 
-The base code of this package is taken from the [Object-Oriented Forms lesson](https://laracasts.com/series/learn-vue-2-step-by-step/episodes/19) in the [Vue 2.0 series](https://laracasts.com/series/learn-vue-2-step-by-step/) on [Laracasts](https://laracasts.com/).
-
-When submitted this form will be posted to `/newsItems`. 
+The code of this package is based on the [Object-Oriented Forms lesson](https://laracasts.com/series/learn-vue-2-step-by-step/episodes/19) in the [Vue 2.0 series](https://laracasts.com/series/learn-vue-2-step-by-step/) on [Laracasts](https://laracasts.com/).
 
 ## Postcardware
 
