@@ -28,7 +28,7 @@
     "babel-preset-es2015": "^6.9.0",
     "chai": "^3.5.0",
     "eslint": "^3.7.1",
-    "eslint-config-spatie": "^1.1.0",
+    "eslint-config-spatie": "^1.2.7",
     "jest": "^18.0.0",
     "vue": "^2.1.7"
   },
