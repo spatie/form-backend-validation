@@ -34,7 +34,9 @@ describe('Errors', () => {
             'first_name': ['Value is required'],
         });
 
-        await form.submit('post', 'http://example.com/posts');
+        try {
+            await form.submit('post', 'http://example.com/posts');
+        } catch(e) {}
 
         assert.isTrue(form.errors.has('first_name'));
     });
