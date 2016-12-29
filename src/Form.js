@@ -10,7 +10,7 @@ class Form {
     constructor(data) {
         this.originalData = data;
 
-        for (const field in data) {
+        for (let field in data) {
             this[field] = data[field];
         }
 
@@ -22,10 +22,11 @@ class Form {
      * Fetch all relevant data for the form.
      */
     data() {
-        const data = Object.assign({}, this);
+        let data = {};
 
-        delete data.originalData;
-        delete data.errors;
+        for (let property in this.originalData) {
+            data[property] = this[property];
+        }
 
         return data;
     }
@@ -35,11 +36,51 @@ class Form {
      * Reset the form fields.
      */
     reset() {
-        for (const field in this.originalData) {
+        for (let field in this.originalData) {
             this[field] = '';
         }
 
         this.errors.clear();
+    }
+
+
+    /**
+     * Send a POST request to the given URL.
+     * .
+     * @param {string} url
+     */
+    post(url) {
+        return this.submit('post', url);
+    }
+
+
+    /**
+     * Send a PUT request to the given URL.
+     * .
+     * @param {string} url
+     */
+    put(url) {
+        return this.submit('put', url);
+    }
+
+
+    /**
+     * Send a PATCH request to the given URL.
+     * .
+     * @param {string} url
+     */
+    patch(url) {
+        return this.submit('patch', url);
+    }
+
+
+    /**
+     * Send a DELETE request to the given URL.
+     * .
+     * @param {string} url
+     */
+    delete(url) {
+        return this.submit('DELETE', url);
     }
 
 
@@ -50,28 +91,41 @@ class Form {
      * @param {string} url
      */
     submit(requestType, url) {
-        return axios[requestType](url, this.data())
-            .then(this.onSuccess.bind(this))
-            .catch(this.onFail.bind(this));
+        return new Promise((resolve, reject) => {
+            axios[requestType](url, this.data())
+                .then(response => {
+                    this.onSuccess(response.data);
+
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    this.onFail(error.response.data);
+
+                    reject(error.response.data);
+                });
+        });
     }
 
 
     /**
      * Handle a successful form submission.
      *
-     * @param {object} response
+     * @param {object} data
      */
-    onSuccess(response) {
+    onSuccess(data) {
+        alert(data.message); // temporary
+
         this.reset();
     }
+
 
     /**
      * Handle a failed form submission.
      *
-     * @param {object} error
+     * @param {object} errors
      */
-    onFail(error) {
-        this.errors.record(error.response.data);
+    onFail(errors) {
+        this.errors.record(errors);
     }
 }
 
