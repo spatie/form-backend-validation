@@ -9,7 +9,7 @@
 
 Wouldn't it be great if you could just use your back end to validate forms on the front end? This package provides a `Form` class does exactly that. It can post itself to a configured endpoint and manage errors. The class meant to be used in a `Vue` component and works out of the box with a Laravel back end.
 
-Take a look at the [usage section]('#usage') to view a detailed example on how to use it.
+Take a look at the [usage section](#usage) to view a detailed example on how to use it.
 
 The code of this package is based on the [Object-Oriented Forms lesson](https://laracasts.com/series/learn-vue-2-step-by-step/episodes/19) in the [Vue 2.0 series](https://laracasts.com/series/learn-vue-2-step-by-step/) on [Laracasts](https://laracasts.com/).
 
