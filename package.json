@@ -1,5 +1,5 @@
 {
-  "name": "vue-form-backend-validation",
+  "name": "form-backend-validation",
   "version": "0.0.1",
   "description": "An easy way to validate forms using back end logic",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/spatie/vue-form-backend-validation.git"
+    "url": "https://github.com/spatie/form-backend-validation.git"
   },
   "keywords": [
     "spatie",
@@ -25,9 +25,9 @@
   "author": "Freek Van der Herten",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/spatie/vue-form-backend-validation/issues"
+    "url": "https://github.com/spatie/form-backend-validation/issues"
   },
-  "homepage": "https://github.com/spatie/vue-form-backend-validation",
+  "homepage": "https://github.com/spatie/form-backend-validation",
   "dependencies": {
     "axios": "^0.15.3"
   },
