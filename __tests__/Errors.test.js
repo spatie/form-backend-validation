@@ -12,7 +12,7 @@ describe('Errors', () => {
     it('can determine if there are any errors', () => {
         assert.isFalse(errors.any());
 
-        errors.record({'first_name': ['Value is required']})
+        errors.record({ 'first_name': ['Value is required'] });
 
         assert.isTrue(errors.any());
     });
@@ -20,7 +20,7 @@ describe('Errors', () => {
     it('can get a specific error', () => {
         assert.isFalse(errors.any());
 
-        errors.record({'first_name': ['Value is required']})
+        errors.record({ 'first_name': ['Value is required'] });
 
         assert.equal('Value is required', errors.get('first_name'));
 
@@ -31,7 +31,7 @@ describe('Errors', () => {
         errors.record({
             'first_name': ['Value is required'],
             'last_name': ['Value is required'],
-        })
+        });
 
         assert.isTrue(errors.any());
 
@@ -44,7 +44,7 @@ describe('Errors', () => {
         errors.record({
             'first_name': ['Value is required'],
             'last_name': ['Value is required'],
-        })
+        });
 
         errors.clear('first_name');
 

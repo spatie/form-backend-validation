@@ -1,4 +1,4 @@
-import {assert} from 'chai';
+import { assert } from 'chai';
 import Form from '../src/Form';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
@@ -36,7 +36,7 @@ describe('Errors', () => {
 
         try {
             await form.submit('post', 'http://example.com/posts');
-        } catch(e) {}
+        } catch (e) {} // eslint-disable-line no-empty
 
         assert.isTrue(form.errors.has('first_name'));
     });

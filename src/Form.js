@@ -10,39 +10,36 @@ class Form {
     constructor(data) {
         this.originalData = data;
 
-        for (let field in data) {
+        for (const field in data) {
             this[field] = data[field];
         }
 
         this.errors = new Errors();
     }
 
-
     /**
      * Fetch all relevant data for the form.
      */
     data() {
-        let data = {};
+        const data = {};
 
-        for (let property in this.originalData) {
+        for (const property in this.originalData) {
             data[property] = this[property];
         }
 
         return data;
     }
 
-
     /**
      * Reset the form fields.
      */
     reset() {
-        for (let field in this.originalData) {
+        for (const field in this.originalData) {
             this[field] = '';
         }
 
         this.errors.clear();
     }
-
 
     /**
      * Send a POST request to the given URL.
@@ -53,7 +50,6 @@ class Form {
         return this.submit('post', url);
     }
 
-
     /**
      * Send a PUT request to the given URL.
      * .
@@ -62,7 +58,6 @@ class Form {
     put(url) {
         return this.submit('put', url);
     }
-
 
     /**
      * Send a PATCH request to the given URL.
@@ -73,16 +68,14 @@ class Form {
         return this.submit('patch', url);
     }
 
-
     /**
      * Send a DELETE request to the given URL.
      * .
      * @param {string} url
      */
     delete(url) {
-        return this.submit('DELETE', url);
+        return this.submit('delete', url);
     }
-
 
     /**
      * Submit the form.
@@ -106,7 +99,6 @@ class Form {
         });
     }
 
-
     /**
      * Handle a successful form submission.
      *
@@ -117,7 +109,6 @@ class Form {
 
         this.reset();
     }
-
 
     /**
      * Handle a failed form submission.
