@@ -26,7 +26,7 @@ The best postcards will get published on the open source page on our website.
 You can install the package via yarn:
 
 ```bash
-$ yarn add vue-form-backend-validation
+$ yarn add form-backend-validation
 ```
 
 ## Usage
