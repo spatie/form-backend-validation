@@ -7,6 +7,15 @@ class Errors {
     }
 
     /**
+     * Get all the errors.
+     *
+     * @param {object} errors
+     */
+    all() {
+        return this.errors;
+    }
+
+    /**
      * Determine if an errors exists for the given field.
      *
      * @param {string} field

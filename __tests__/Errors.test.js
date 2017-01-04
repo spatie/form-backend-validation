@@ -17,6 +17,14 @@ describe('Errors', () => {
         assert.isTrue(errors.any());
     });
 
+    it('can get all errors', () => {
+        const allErrors = { 'first_name': ['Value is required'] };
+
+        errors.record(allErrors);
+
+        assert.equal(allErrors, errors.all());
+    });
+
     it('can get a specific error', () => {
         assert.isFalse(errors.any());
 

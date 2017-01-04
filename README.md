@@ -31,48 +31,38 @@ $ yarn add form-backend-validation
 
 ## Usage
 
-This is an example of a fully configured form that could be built up in a `Blade` view.
-
-```html
-<form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" v-model="form.name"> 
-        <span v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
-    </div>
-
-    <div>
-        <label for="text">Text:</label>
-        <input type="text" name="text" v-model="form.text">
-       <span v-if="form.errors.has('text')" v-text="form.errors.get('text')"></span>
-    </div>
-
-    <div>
-        <button :disabled="form.errors.any()">Create news item</button>
-    </div>
-</form>
-```
-
-This is an example of a `Vue` component that uses the provided `Form` class. 
+You find an example implementation with Laravel and Vue in the [spatie/form-backend-validation-example-app repo](https://github.com/spatie/form-backend-validation-example-app). 
 
 ```js
-new Vue({
-    el: '#app',
+import Form from 'form-backend-validation';
 
-    data: {
-        form: new Form({
-            name: '',
-            text: ''
-        })
-    },
-
-    methods: {
-        onSubmit() {
-            this.form.submit('post', '/newsItems');
-        }
-    }
+//instantiate a form class with some value
+const form = new Form({
+    field1: 'value 1',
+    field2: 'value 2',
 });
+
+// submitting the form, you can also use `.put`, `.patch` and `.delete`
+form.post(anUrl)
+   .then(response => ...)
+   .catch(response => ...);
+
+// if there were any errors, you can get to them easily
+
+// returns an object in which the keys are the field names 
+// and the values array with error message sent by the server
+form.errors.all() 
+
+form.errors.any(); // returns true if there were any error
+
+form.errors.has(fieldName) // return true if there is an error for the given fieldName
+
+form.errors.get(fieldName) // return an array with errors for the given fieldName
+
+form.errors.clear() // forget all errors.
 ```
+
+
 
 ## Changelog
 
