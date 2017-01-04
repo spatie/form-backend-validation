@@ -104,7 +104,7 @@ class Form {
      *
      * @param {object} data
      */
-    onSuccess(data) {
+    onSuccess() {
         this.reset();
     }
 
