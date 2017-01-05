@@ -30,7 +30,7 @@ $ yarn add form-backend-validation
 
 You find an example implementation with Laravel and Vue in the [spatie/form-backend-validation-example-app repo](https://github.com/spatie/form-backend-validation-example-app). 
 
-TO DO: insert screenshot
+![Screenshot](https://raw.githubusercontent.com/spatie/form-backend-validation-example-app/master/public/images/screenshot.png)
 
 ```js
 import Form from 'form-backend-validation';
