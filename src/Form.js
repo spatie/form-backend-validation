@@ -9,12 +9,11 @@ class Form {
      */
     constructor(data) {
         this.originalData = data;
+        this.errors = new Errors();
 
         for (const field in data) {
             this[field] = data[field];
         }
-
-        this.errors = new Errors();
     }
 
     /**
@@ -43,7 +42,7 @@ class Form {
 
     /**
      * Send a POST request to the given URL.
-     * .
+     *
      * @param {string} url
      */
     post(url) {
@@ -52,7 +51,7 @@ class Form {
 
     /**
      * Send a PUT request to the given URL.
-     * .
+     *
      * @param {string} url
      */
     put(url) {
@@ -61,7 +60,7 @@ class Form {
 
     /**
      * Send a PATCH request to the given URL.
-     * .
+     *
      * @param {string} url
      */
     patch(url) {
@@ -70,7 +69,7 @@ class Form {
 
     /**
      * Send a DELETE request to the given URL.
-     * .
+     *
      * @param {string} url
      */
     delete(url) {
@@ -84,19 +83,35 @@ class Form {
      * @param {string} url
      */
     submit(requestType, url) {
+        this.validateRequestType(requestType);
+        
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
-                .then(response => {
+                .then((response) => {
                     this.onSuccess(response.data);
 
                     resolve(response.data);
                 })
-                .catch(error => {
+                .catch((error) => {
                     this.onFail(error.response.data);
 
                     reject(error.response.data);
                 });
         });
+    }
+
+    /**
+     * Validate a request type.
+     * 
+     * @param {string} requestType
+     */
+    validateRequestType(requestType) {
+        const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
+        
+        if (requestTypes.indexOf(requestType) === -1) {
+            throw new Error(`\`${requestType}\` is not a valid request type, ` +
+                `must be one of: \`${requestTypes.join('\`, \`')}\`.`);
+        }
     }
 
     /**
