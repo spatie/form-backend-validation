@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/spatie/vue-form-backend-validation).
+We accept contributions via Pull Requests on [Github](https://github.com/spatie/form-backend-validation).
 
 ## Pull Requests
 

@@ -17,10 +17,10 @@
   "keywords": [
     "spatie",
     "vue",
+    "laravel",
     "form",
     "validation",
-    "server",
-    "laravel"
+    "server"
   ],
   "author": "Freek Van der Herten",
   "license": "MIT",
