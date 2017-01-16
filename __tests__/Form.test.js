@@ -40,4 +40,11 @@ describe('Errors', () => {
 
         assert.isTrue(form.errors.has('first_name'));
     });
+
+    it('can accept an array with form field names', () => {
+        form = new Form(['field1', 'field2']);
+
+        assert.equal(form.data()['field1'], '');
+        assert.equal(form.data()['field2'], '');
+    });
 });

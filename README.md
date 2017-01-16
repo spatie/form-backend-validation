@@ -42,6 +42,9 @@ const form = new Form({
     field2: 'value 2',
 });
 
+// a form can also be initiated with an array
+const form = new Form(['field1', 'field2']);
+
 // submitting the form, you can also use `.put`, `.patch` and `.delete`
 form.post(anUrl)
    .then(response => ...)

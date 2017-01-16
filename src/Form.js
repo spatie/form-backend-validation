@@ -8,6 +8,14 @@ class Form {
      * @param {object} data
      */
     constructor(data) {
+
+        if (Array.isArray(data)) {
+            data = data.reduce((carry, element) => {
+                carry[element] = '';
+                return carry;
+            }, {});
+        }
+
         this.originalData = data;
         this.errors = new Errors();
 
