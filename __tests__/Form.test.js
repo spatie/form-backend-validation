@@ -23,7 +23,17 @@ describe('Errors', () => {
     });
 
     it('can reset the form values', () => {
+        form.field1 = 'changed';
+        form.field2 = 'changed';
+
         form.reset();
+
+        assert.equal(form.field1, 'value 1');
+        assert.equal(form.field2, 'value 2');
+    });
+
+    it('can clear the form values', () => {
+        form.clear();
 
         assert.equal(form.field1, '');
         assert.equal(form.field2, '');

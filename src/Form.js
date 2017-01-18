@@ -42,6 +42,17 @@ class Form {
      */
     reset() {
         for (const field in this.originalData) {
+            this[field] = this.originalData[field];
+        }
+
+        this.errors.clear();
+    }
+
+    /**
+     * Clear the form fields.
+     */
+    clear() {
+        for (const field in this.originalData) {
             this[field] = '';
         }
 
