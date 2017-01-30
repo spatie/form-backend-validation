@@ -2,10 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
-## 1.0.1 - 2017-01-30
+## 1.1.1 - 2017-01-30
 - clear all errors when submitting the form
 
-## 1.0.0 - 2017-01-18
+## 1.1.0 - 2017-01-18
 - make `reset` method on `Form` respect default values
 - add `clear` method on `Form`
 
