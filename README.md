@@ -50,6 +50,8 @@ form.post(anUrl)
    .then(response => ...)
    .catch(response => ...);
 
+form.processing; // returns true if request is being executed
+
 // if there were any errors, you can get to them easily
 
 // returns an object in which the keys are the field names 
