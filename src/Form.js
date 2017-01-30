@@ -18,6 +18,7 @@ class Form {
 
         this.originalData = data;
         this.errors = new Errors();
+        this.processing = false;
 
         for (const field in data) {
             this[field] = data[field];
@@ -104,15 +105,18 @@ class Form {
     submit(requestType, url) {
         this.validateRequestType(requestType);
         this.errors.clear();
-        
+        this.processing = true;
+
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
                 .then((response) => {
+                    this.processing = false;
                     this.onSuccess(response.data);
 
                     resolve(response.data);
                 })
                 .catch((error) => {
+                    this.processing = false;
                     this.onFail(error.response.data);
 
                     reject(error.response);
