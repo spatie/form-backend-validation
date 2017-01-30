@@ -103,6 +103,7 @@ class Form {
      */
     submit(requestType, url) {
         this.validateRequestType(requestType);
+        this.errors.clear();
         
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
