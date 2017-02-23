@@ -17,6 +17,18 @@ describe('Errors', () => {
         assert.isTrue(errors.any());
     });
 
+    it('can determine if a given field or object has any errors', () => {
+        assert.isFalse(errors.any());
+
+        errors.record({
+            'first_name': ['Value is required'],
+            'person.0.first_name': ['Value is required'],
+        });
+        
+        assert.isTrue(errors.has('first_name'));
+        assert.isTrue(errors.has('person'));
+    });
+
     it('can get all errors', () => {
         const allErrors = { 'first_name': ['Value is required'] };
 

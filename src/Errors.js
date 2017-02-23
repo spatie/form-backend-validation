@@ -16,12 +16,22 @@ class Errors {
     }
 
     /**
-     * Determine if an errors exists for the given field.
+     * Determine if any errors exists for the given field or object.
      *
      * @param {string} field
      */
     has(field) {
-        return this.errors.hasOwnProperty(field);
+        let hasError = this.errors.hasOwnProperty(field);
+
+        if (!hasError) {
+            const errors = Object.keys(this.errors).filter(e => {
+                return e.startsWith(`${field}.`);
+            });
+
+            hasError = errors.length > 0;
+        }
+
+        return hasError;
     }
 
     /**
