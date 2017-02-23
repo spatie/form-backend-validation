@@ -25,6 +25,7 @@ describe('Errors', () => {
             'person.0.first_name': ['Value is required'],
         });
         
+        assert.isFalse(errors.has('first'));
         assert.isTrue(errors.has('first_name'));
         assert.isTrue(errors.has('person'));
     });
