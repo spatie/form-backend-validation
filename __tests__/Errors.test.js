@@ -72,4 +72,24 @@ describe('Errors', () => {
         assert.isFalse(errors.has('first_name'));
         assert.isTrue(errors.has('last_name'));
     });
+
+    it('can clear all errors of a given object', () => {
+        errors.record({
+            'person.first_name': ['Value is required'],
+            'person.last_name': ['Value is required'],
+            'dates.0.start_date': ['Value is required'],
+            'dates.1.start_date': ['Value is required'],
+        });
+
+        errors.clear('person');
+        errors.clear('dates.0');
+
+        assert.isFalse(errors.has('person'));
+        assert.isFalse(errors.has('person.first_name'));
+        assert.isFalse(errors.has('person.last_name'));
+
+        assert.isTrue(errors.has('dates'));
+        assert.isFalse(errors.has('dates.0.start_date'));
+        assert.isTrue(errors.has('dates.1.start_date'));
+    });
 });

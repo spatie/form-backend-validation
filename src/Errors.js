@@ -24,9 +24,9 @@ class Errors {
         let hasError = this.errors.hasOwnProperty(field);
 
         if (!hasError) {
-            const errors = Object.keys(this.errors).filter(e => {
-                return e.startsWith(`${field}.`);
-            });
+            const errors = Object
+                .keys(this.errors)
+                .filter(e => e.startsWith(`${field}.`));
 
             hasError = errors.length > 0;
         }
@@ -62,13 +62,19 @@ class Errors {
     }
 
     /**
-     * Clear one or all error fields.
+     * Clear a specific field, object or all error fields.
      *
      * @param {string|null} field
      */
     clear(field) {
         if (field) {
-            delete this.errors[field];
+            if (this.errors.hasOwnProperty(field)) {
+                delete this.errors[field];
+            } else {
+                Object.keys(this.errors)
+                    .filter(e => e.startsWith(`${field}.`))
+                    .forEach(e => delete this.errors[e]);
+            }
 
             return;
         }
