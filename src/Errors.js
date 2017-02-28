@@ -67,19 +67,15 @@ class Errors {
      * @param {string|null} field
      */
     clear(field) {
-        if (field) {
-            if (this.errors.hasOwnProperty(field)) {
-                delete this.errors[field];
-            } else {
-                Object.keys(this.errors)
-                    .filter(e => e.startsWith(`${field}.`))
-                    .forEach(e => delete this.errors[e]);
-            }
+        if (! field) {
+            this.errors = {};
 
             return;
         }
 
-        this.errors = {};
+        Object.keys(this.errors)
+              .filter(e => e === field || e.startsWith(`${field}.`))
+              .forEach(e => delete this.errors[e]);
     }
 }
 
