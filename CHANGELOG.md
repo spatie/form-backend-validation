@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 1.3.0 - 2017-03-17
+- add `errors.has` and `errors.clear`
+
 ## 1.2.0 - 2017-01-31
 - add processing property
 
