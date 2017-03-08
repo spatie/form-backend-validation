@@ -16,12 +16,22 @@ class Errors {
     }
 
     /**
-     * Determine if an errors exists for the given field.
+     * Determine if any errors exists for the given field or object.
      *
      * @param {string} field
      */
     has(field) {
-        return this.errors.hasOwnProperty(field);
+        let hasError = this.errors.hasOwnProperty(field);
+
+        if (!hasError) {
+            const errors = Object
+                .keys(this.errors)
+                .filter(e => e.startsWith(`${field}.`));
+
+            hasError = errors.length > 0;
+        }
+
+        return hasError;
     }
 
     /**
@@ -52,18 +62,20 @@ class Errors {
     }
 
     /**
-     * Clear one or all error fields.
+     * Clear a specific field, object or all error fields.
      *
      * @param {string|null} field
      */
     clear(field) {
-        if (field) {
-            delete this.errors[field];
+        if (! field) {
+            this.errors = {};
 
             return;
         }
 
-        this.errors = {};
+        Object.keys(this.errors)
+              .filter(e => e === field || e.startsWith(`${field}.`))
+              .forEach(e => delete this.errors[e]);
     }
 }
 

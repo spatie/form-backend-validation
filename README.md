@@ -36,10 +36,14 @@ You find an example implementation with Laravel and Vue in the [spatie/form-back
 ```js
 import Form from 'form-backend-validation';
 
-//instantiate a form class with some value
+// instantiate a form class with some value
 const form = new Form({
     field1: 'value 1',
     field2: 'value 2',
+    person: {
+        first_name: 'John',
+        last_name: 'Doe',
+    },
 });
 
 // a form can also be initiated with an array
@@ -50,21 +54,36 @@ form.post(anUrl)
    .then(response => ...)
    .catch(response => ...);
 
-form.processing; // returns true if request is being executed
+// returns true if request is being executed
+form.processing;
+
 
 // if there were any errors, you can get to them easily
+
+// example errors object
+{ 
+    'field1': ['Value is required'], // single field
+    'person.first_name': ['Value is required'], // field in person object
+}
 
 // returns an object in which the keys are the field names 
 // and the values array with error message sent by the server
 form.errors.all() 
 
-form.errors.any(); // returns true if there were any error
+// returns true if there were any error
+form.errors.any(); 
 
-form.errors.has(fieldName) // return true if there is an error for the given fieldName
+// returns true if there is an error for the given field name or object
+form.errors.has(key)
 
-form.errors.get(fieldName) // return an array with errors for the given fieldName
+// returns an array with errors for the given field name
+form.errors.get(key)
 
-form.errors.clear() // forget all errors.
+// clear all errors
+form.errors.clear()
+
+// clear the error of the given field name or all errors on the given object
+form.errors.clear(key)
 ```
 
 ## Changelog
