@@ -92,4 +92,13 @@ describe('Errors', () => {
         assert.isFalse(errors.has('dates.0.start_date'));
         assert.isTrue(errors.has('dates.1.start_date'));
     });
+
+    it('can handle errors that returned as string', () => {
+        errors.record({
+            'person.first_name': 'Value is required',
+        });
+
+        assert.isTrue(errors.has('person.first_name'));
+        assert.equal('Value is required', errors.get('person.first_name'));
+    });
 });
