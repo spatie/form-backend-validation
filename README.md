@@ -27,6 +27,12 @@ You can install the package via yarn:
 $ yarn add form-backend-validation
 ```
 
+Or via npm:
+
+```bash
+$ npm install form-backend-validation
+```
+
 ## Usage
 
 You find an example implementation with Laravel and Vue in the [spatie/form-backend-validation-example-app repo](https://github.com/spatie/form-backend-validation-example-app). 
