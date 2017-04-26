@@ -3,7 +3,7 @@
 All notable changes to `form-backend-validation` will be documented in this file
 
 ## 1.4.1 - 2017-04-26
-- Fixed: Axios is now a peer dependency to avoid multiple installed versions
+- Changed: Axios is now a peer dependency to avoid multiple installed versions. Add axios to your project with `npm install axios --save` or `yarn add axios`.
 
 ## 1.4.0 - 2017-03-12
 - Added: Support for errors that are returned as string
