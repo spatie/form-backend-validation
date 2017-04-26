@@ -33,6 +33,7 @@
     "vue": "^2.0.3"
   },
   "devDependencies": {
+    "axios": "^0.16",
     "axios-mock-adapter": "^1.7.1",
     "babel-cli": "^6.9.0",
     "babel-jest": "^18.0.0",
