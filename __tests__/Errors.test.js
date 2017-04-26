@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import Errors from '../src/Errors';
 
 let errors;
@@ -10,24 +9,24 @@ describe('Errors', () => {
     });
 
     it('can determine if there are any errors', () => {
-        assert.isFalse(errors.any());
+        expect(errors.any()).toBe(false);
 
         errors.record({ 'first_name': ['Value is required'] });
 
-        assert.isTrue(errors.any());
+        expect(errors.any()).toBe(true);
     });
 
     it('can determine if a given field or object has any errors', () => {
-        assert.isFalse(errors.any());
+        expect(errors.any()).toBe(false);
 
         errors.record({
             'first_name': ['Value is required'],
             'person.0.first_name': ['Value is required'],
         });
-        
-        assert.isFalse(errors.has('first'));
-        assert.isTrue(errors.has('first_name'));
-        assert.isTrue(errors.has('person'));
+
+        expect(errors.has('first')).toBe(false);
+        expect(errors.has('first_name')).toBe(true);
+        expect(errors.has('person')).toBe(true);
     });
 
     it('can get all errors', () => {
@@ -35,17 +34,17 @@ describe('Errors', () => {
 
         errors.record(allErrors);
 
-        assert.equal(allErrors, errors.all());
+        expect(errors.all()).toEqual(allErrors);
     });
 
     it('can get a specific error', () => {
-        assert.isFalse(errors.any());
+        expect(errors.any()).toBe(false);
 
         errors.record({ 'first_name': ['Value is required'] });
 
-        assert.equal('Value is required', errors.get('first_name'));
+        expect(errors.get('first_name')).toEqual('Value is required');
 
-        assert.isUndefined(errors.get('last_name'));
+        expect(errors.get('last_name')).toBeUndefined();
     });
 
     it('can clear all the errors', () => {
@@ -54,11 +53,11 @@ describe('Errors', () => {
             'last_name': ['Value is required'],
         });
 
-        assert.isTrue(errors.any());
+        expect(errors.any()).toBe(true);
 
         errors.clear();
 
-        assert.isFalse(errors.any());
+        expect(errors.any()).toBe(false);
     });
 
     it('can clear a specific error', () => {
@@ -69,8 +68,8 @@ describe('Errors', () => {
 
         errors.clear('first_name');
 
-        assert.isFalse(errors.has('first_name'));
-        assert.isTrue(errors.has('last_name'));
+        expect(errors.has('first_name')).toBe(false)
+        expect(errors.has('last_name')).toBe(true)
     });
 
     it('can clear all errors of a given object', () => {
@@ -84,13 +83,13 @@ describe('Errors', () => {
         errors.clear('person');
         errors.clear('dates.0');
 
-        assert.isFalse(errors.has('person'));
-        assert.isFalse(errors.has('person.first_name'));
-        assert.isFalse(errors.has('person.last_name'));
+        expect(errors.has('person')).toBe(false);
+        expect(errors.has('person.first_name')).toBe(false);
+        expect(errors.has('person.last_name')).toBe(false);
 
-        assert.isTrue(errors.has('dates'));
-        assert.isFalse(errors.has('dates.0.start_date'));
-        assert.isTrue(errors.has('dates.1.start_date'));
+        expect(errors.has('dates')).toBe(true);
+        expect(errors.has('dates.0.start_date')).toBe(false);
+        expect(errors.has('dates.1.start_date')).toBe(true);
     });
 
     it('can handle errors that are returned as string', () => {
@@ -98,7 +97,7 @@ describe('Errors', () => {
             'person.first_name': 'Value is required',
         });
 
-        assert.isTrue(errors.has('person.first_name'));
-        assert.equal('Value is required', errors.get('person.first_name'));
+        expect(errors.has('person.first_name')).toBe(true);
+        expect(errors.get('person.first_name')).toEqual('Value is required');
     });
 });
