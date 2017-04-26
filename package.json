@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/spatie/form-backend-validation",
   "peerDependencies": {
-    "vue": "^2.0.3",
-    "axios": "^0.15 || ^0.16"
+    "axios": "^0.15 || ^0.16",
+    "vue": "^2.0.3"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.7.1",
@@ -39,7 +39,7 @@
     "babel-plugin-transform-async-to-generator": "^6.16.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-es2015": "^6.9.0",
-    "chai": "^3.5.j0",
+    "chai": "^3.5.0",
     "eslint": "^3.7.1",
     "eslint-config-spatie": "^1.2.7",
     "jest": "^18.0.0",
