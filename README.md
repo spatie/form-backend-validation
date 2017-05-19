@@ -105,13 +105,9 @@ const form = new Form({
 });
 ```
 
-Available options are:
-
 #### `resetOnSuccess: bool`
 
-Default: `true`
-
-Set to `false` if you don't want the form to reset to it's original values after a succesfull submit.
+Default: `true`. Set to `false` if you don't want the form to reset to it's original values after a succesfull submit.
 
 ## Changelog
 
