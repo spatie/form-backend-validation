@@ -92,6 +92,27 @@ form.errors.clear()
 form.errors.clear(key)
 ```
 
+### Options
+
+The `Form` class accepts a second `options` parameter.
+
+```js
+const form = new Form({
+    field1: 'value 1',
+    field2: 'value 2',
+}, {
+    resetOnSuccess: false,
+});
+```
+
+Available options are:
+
+#### `resetOnSuccess: bool`
+
+Default: `true`
+
+Set to `false` if you don't want the form to reset to it's original values after a succesfull submit.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
