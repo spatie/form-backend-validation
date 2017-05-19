@@ -38,7 +38,7 @@ describe('Errors', () => {
         expect(form.field2).toEqual('');
     });
 
-    it('will record the errors that the server passes through', async() => {
+    it('will record the errors that the server passes through', async () => {
         mockAdapter.onPost('http://example.com/posts').reply(422, {
             'first_name': ['Value is required'],
         });
@@ -55,5 +55,25 @@ describe('Errors', () => {
 
         expect(form.data()['field1']).toEqual('');
         expect(form.data()['field2']).toEqual('');
+    });
+
+    it('resets the form on success unless the feature is disabled', async () => {
+        mockAdapter.onPost('http://example.com/posts').reply(200, {});
+
+        form = new Form({ field: 'value' });
+
+        form.field = 'changed';
+
+        await form.submit('post', 'http://example.com/posts');
+
+        expect(form.field).toEqual('value');
+
+        form = new Form({ field: 'value' }, { resetOnSuccess: false });
+
+        form.field = 'changed';
+
+        await form.submit('post', 'http://example.com/posts');
+
+        expect(form.field).toEqual('changed');
     });
 });

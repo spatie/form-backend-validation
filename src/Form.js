@@ -6,8 +6,9 @@ class Form {
      * Create a new Form instance.
      *
      * @param {object} data
+     * @param {object} options
      */
-    constructor(data) {
+    constructor(data, options) {
 
         if (Array.isArray(data)) {
             data = data.reduce((carry, element) => {
@@ -23,6 +24,11 @@ class Form {
         for (const field in data) {
             this[field] = data[field];
         }
+
+        this.__options = { 
+            resetOnSuccess: true,
+            ...options,
+        };
     }
 
     /**
@@ -144,7 +150,9 @@ class Form {
      * @param {object} data
      */
     onSuccess() {
-        this.reset();
+        if (this.__options.resetOnSuccess === true) {
+            this.reset();
+        }
     }
 
     /**
