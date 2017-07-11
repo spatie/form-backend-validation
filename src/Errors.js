@@ -54,6 +54,20 @@ class Errors {
             return this.errors[field][0];
         }
     }
+    
+    /**
+     * Add a single error message for given field
+     *
+     * @param {string} field
+     * @param {string} error
+     */
+    add(field, error) {
+        if (!this.errors[field) {
+            this.errors[field] = [];
+        }
+            
+        this.errors[field][] = error;
+    }
 
     /**
      * Record the new errors.
