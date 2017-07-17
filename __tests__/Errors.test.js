@@ -100,4 +100,18 @@ describe('Errors', () => {
         expect(errors.has('person.first_name')).toBe(true);
         expect(errors.get('person.first_name')).toEqual('Value is required');
     });
+
+    it('can accept an object of errors in its constructor', () => {
+        errors = new Errors({
+            first_name: ['Value is required'],
+        });
+
+        expect(errors.get('first_name')).toEqual('Value is required');
+    });
+
+    it('can assign an empty object in its constructor if no errors are passed', () => {
+        errors = new Errors();
+
+        expect(errors.all()).toEqual({});
+    });
 });
