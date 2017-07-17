@@ -2,6 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 1.5.1 - 2017-06-17
+- Added: Can now import `Errors` directly as a separate module
+- Added: `Errors` can now accept an object of errors.
+
 ## 1.5.0 - 2017-05-19
 - Added: `options` parameter to `Form`. Currently accepts a `resetOnSuccess` option
 
