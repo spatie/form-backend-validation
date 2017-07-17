@@ -2,7 +2,7 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
-## 1.5.1 - 2017-06-17
+## 1.5.1 - 2017-07-17
 - Added: Can now import `Errors` directly as a separate module
 - Added: `Errors` can now accept an object of errors.
 
