@@ -163,6 +163,15 @@ class Form {
     onFail(errors) {
         this.errors.record(errors);
     }
+
+    /**
+     * Get the error message(s) for the given field.
+     *
+     * @param field
+     */
+    getError(field) {
+        return this.errors.get(field);
+    }
 }
 
 export default Form;

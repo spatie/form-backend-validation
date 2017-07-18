@@ -76,4 +76,8 @@ describe('Errors', () => {
 
         expect(form.field).toEqual('changed');
     });
+
+    it('can get an error message for a field', () => {
+        expect(form.getError('field1')).toEqual(undefined);
+    });
 });

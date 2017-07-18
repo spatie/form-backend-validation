@@ -2,15 +2,18 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 1.6.0 - 2017-07-18
+- Added: `getError` method on `Form`
+
 ## 1.5.1 - 2017-07-17
 - Added: Can now import `Errors` directly as a separate module
-- Added: `Errors` can now accept an object of errors.
+- Added: `Errors` can now accept an object of errors
 
 ## 1.5.0 - 2017-05-19
 - Added: `options` parameter to `Form`. Currently accepts a `resetOnSuccess` option
 
 ## 1.4.1 - 2017-04-26
-- Changed: Axios is now a peer dependency to avoid multiple installed versions. Add axios to your project with `npm install axios --save` or `yarn add axios`.
+- Changed: Axios is now a peer dependency to avoid multiple installed versions. Add axios to your project with `npm install axios --save` or `yarn add axios`
 
 ## 1.4.0 - 2017-03-12
 - Added: Support for errors that are returned as string

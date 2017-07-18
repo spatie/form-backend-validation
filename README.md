@@ -85,6 +85,9 @@ form.errors.has(key)
 // returns an array with errors for the given field name
 form.errors.get(key)
 
+// shortcut for getting the erros for the given field name
+form.getError(key)
+
 // clear all errors
 form.errors.clear()
 
