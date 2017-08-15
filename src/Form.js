@@ -9,7 +9,6 @@ class Form {
      * @param {object} options
      */
     constructor(data, options) {
-
         if (Array.isArray(data)) {
             data = data.reduce((carry, element) => {
                 carry[element] = '';
@@ -25,7 +24,7 @@ class Form {
             this[field] = data[field];
         }
 
-        this.__options = { 
+        this.__options = {
             resetOnSuccess: true,
             ...options,
         };
@@ -108,13 +107,13 @@ class Form {
      * @param {string} requestType
      * @param {string} url
      */
-    submit(requestType, url) {
+    submit(requestType, url, ajax = axios) {
         this.validateRequestType(requestType);
         this.errors.clear();
         this.processing = true;
 
         return new Promise((resolve, reject) => {
-            axios[requestType](url, this.data())
+            ajax[requestType](url, this.data())
                 .then((response) => {
                     this.processing = false;
                     this.onSuccess(response.data);
@@ -132,12 +131,12 @@ class Form {
 
     /**
      * Validate a request type.
-     * 
+     *
      * @param {string} requestType
      */
     validateRequestType(requestType) {
         const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
-        
+
         if (requestTypes.indexOf(requestType) === -1) {
             throw new Error(`\`${requestType}\` is not a valid request type, ` +
                 `must be one of: \`${requestTypes.join('\`, \`')}\`.`);

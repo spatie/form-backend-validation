@@ -48,7 +48,7 @@ class Errors {
      */
     get(field) {
         if (this.errors[field]) {
-            if(typeof this.errors[field] === 'string') {
+            if (typeof this.errors[field] === 'string') {
                 return this.errors[field];
             }
             return this.errors[field][0];
