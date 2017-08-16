@@ -21,16 +21,16 @@ The best postcards will get published on the open source page on our website.
 
 ## Install
 
-You can install the package via yarn:
+You can install the package via yarn (or npm):
 
 ```bash
 $ yarn add form-backend-validation
 ```
 
-Or via npm:
+By default, this package expects `axios` to be installed (unless you're using your own http library, see the [Options](#options) section for that).
 
 ```bash
-$ npm install form-backend-validation
+$ yarn add axios
 ```
 
 ## Usage
