@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Errors from './Errors';
+import { isArray } from './util';
 
 class Form {
     /**
@@ -9,7 +10,7 @@ class Form {
      * @param {object} options
      */
     constructor(data, options) {
-        if (Array.isArray(data)) {
+        if (isArray(data)) {
             data = data.reduce((carry, element) => {
                 carry[element] = '';
                 return carry;
