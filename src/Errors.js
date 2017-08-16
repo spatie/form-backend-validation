@@ -23,7 +23,7 @@ class Errors {
     has(field) {
         let hasError = this.errors.hasOwnProperty(field);
 
-        if (!hasError) {
+        if (! hasError) {
             const errors = Object
                 .keys(this.errors)
                 .filter(e => e.startsWith(`${field}.`));

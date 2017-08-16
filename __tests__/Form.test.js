@@ -81,21 +81,19 @@ describe('Errors', () => {
         expect(form.getError('field1')).toEqual(undefined);
     });
 
-    it('can accept an axios instance in options', () => {
+    it('can accept a custom http instance in options', () => {
 
-        let instance = axios.create({baseURL: 'http://anotherexample.com'});
+        const http = axios.create({ baseURL: 'http://anotherexample.com' });
 
-        mockAdapter = new MockAdapter(instance);
+        mockAdapter = new MockAdapter(http);
 
-        form = new Form({}, {axios: instance});
+        form = new Form({}, { http });
 
-        // @link https://github.com/mzabriskie/axios/issues/737
-        expect(Object.keys(form.getAxios()).reduce((acc, prop) => axios.hasOwnProperty(prop), false)).toBe(true);
-        expect(instance.defaults.baseURL).toBe('http://anotherexample.com');
+        expect(form.__http.defaults.baseURL).toBe('http://anotherexample.com');
 
         form = new Form({});
-        expect(axios === form.getAxios()).toBe(true);
 
+        expect(form.__http.defaults.baseURL).toBe(undefined);
     });
 
 });

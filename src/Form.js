@@ -31,16 +31,13 @@ class Form {
         };
     }
 
-   /*
-    * getAxios
-    * retrieves axios, favouring the injected version if present.
-    * @return axios
-    */
-    getAxios() {
-      let options = this.__options;
-      return options.hasOwnProperty('axios') ? options.axios : axios;
+    get __resetOnSuccess() {
+        return !! this.__options.resetOnSuccess;
     }
 
+    get __http() {
+        return this.__options.http || axios;
+    }
 
     /**
      * Fetch all relevant data for the form.
@@ -124,10 +121,8 @@ class Form {
         this.errors.clear();
         this.processing = true;
 
-        let axios = this.getAxios();
-
         return new Promise((resolve, reject) => {
-            axios[requestType](url, this.data())
+            this.__http[requestType](url, this.data())
                 .then((response) => {
                     this.processing = false;
                     this.onSuccess(response.data);
@@ -163,7 +158,7 @@ class Form {
      * @param {object} data
      */
     onSuccess() {
-        if (this.__options.resetOnSuccess === true) {
+        if (this.__resetOnSuccess) {
             this.reset();
         }
     }
