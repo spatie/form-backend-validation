@@ -68,8 +68,8 @@ describe('Errors', () => {
 
         errors.clear('first_name');
 
-        expect(errors.has('first_name')).toBe(false)
-        expect(errors.has('last_name')).toBe(true)
+        expect(errors.has('first_name')).toBe(false);
+        expect(errors.has('last_name')).toBe(true);
     });
 
     it('can clear all errors of a given object', () => {

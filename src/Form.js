@@ -9,7 +9,6 @@ class Form {
      * @param {object} options
      */
     constructor(data, options) {
-
         if (Array.isArray(data)) {
             data = data.reduce((carry, element) => {
                 carry[element] = '';
@@ -25,11 +24,22 @@ class Form {
             this[field] = data[field];
         }
 
-        this.__options = { 
+        this.__options = {
             resetOnSuccess: true,
             ...options,
         };
     }
+
+   /*
+    * getAxios
+    * retrieves axios, favouring the injected version if present.
+    * @return axios
+    */
+    getAxios() {
+      let options = this.__options;
+      return options.hasOwnProperty('axios') ? options.axios : axios;
+    }
+
 
     /**
      * Fetch all relevant data for the form.
@@ -113,6 +123,8 @@ class Form {
         this.errors.clear();
         this.processing = true;
 
+        let axios = this.getAxios();
+
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
                 .then((response) => {
@@ -132,12 +144,12 @@ class Form {
 
     /**
      * Validate a request type.
-     * 
+     *
      * @param {string} requestType
      */
     validateRequestType(requestType) {
         const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
-        
+
         if (requestTypes.indexOf(requestType) === -1) {
             throw new Error(`\`${requestType}\` is not a valid request type, ` +
                 `must be one of: \`${requestTypes.join('\`, \`')}\`.`);
