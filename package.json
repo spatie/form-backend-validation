@@ -28,12 +28,14 @@
     "url": "https://github.com/spatie/form-backend-validation/issues"
   },
   "homepage": "https://github.com/spatie/form-backend-validation",
+  "optionalDependencies": {
+    "axios": ">=0.15 <1.0"
+  },
   "peerDependencies": {
-    "axios": "^0.15 || ^0.16",
     "vue": "^2.0.3"
   },
   "devDependencies": {
-    "axios": "^0.16",
+    "axios": ">=0.15 <1.0",
     "axios-mock-adapter": "^1.7.1",
     "babel-cli": "^6.9.0",
     "babel-jest": "^18.0.0",

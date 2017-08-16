@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Errors from './Errors';
 import { isArray } from './util';
 
@@ -31,12 +30,14 @@ class Form {
         };
     }
 
-    get __resetOnSuccess() {
-        return !! this.__options.resetOnSuccess;
-    }
-
     get __http() {
-        return this.__options.http || axios;
+        const http = this.__options.http || require('axios');
+
+        if (! http) {
+            throw new Error('No http library provided. Either pass an http option, or install axios.');
+        }
+
+        return http;
     }
 
     /**
@@ -158,7 +159,7 @@ class Form {
      * @param {object} data
      */
     onSuccess() {
-        if (this.__resetOnSuccess) {
+        if (this.__options.resetOnSuccess) {
             this.reset();
         }
     }
