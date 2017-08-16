@@ -2,6 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 1.7.0 - 2017-08-16
+- Added: You can now use your own http library by passing an `http` option
+- Changed: Axios is now an optional dependency
+
 ## 1.6.0 - 2017-07-18
 - Added: `getError` method on `Form`
 

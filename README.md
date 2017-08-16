@@ -112,6 +112,20 @@ const form = new Form({
 
 Default: `true`. Set to `false` if you don't want the form to reset to it's original values after a succesfull submit.
 
+#### `http: Object`
+
+By default this library uses axios for http request. If you want, you can roll with your own http library (or your own axios instance).
+
+*Advanced!* Pass a custom http library object. Your http library needs to adhere to the following interface for any http method you're using:
+
+```ts
+method(url: string, data: Object): Promise<Response>
+```
+
+Supported http methods are `get`, `delete`, `head`, `post`, `put` & `patch`.
+
+If you want to see how the http library is used internally, refer to the `Form` class' `submit` method.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
