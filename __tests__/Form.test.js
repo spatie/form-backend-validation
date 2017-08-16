@@ -80,4 +80,22 @@ describe('Errors', () => {
     it('can get an error message for a field', () => {
         expect(form.getError('field1')).toEqual(undefined);
     });
+
+    it('can accept an axios instance in options', () => {
+
+        let instance = axios.create({baseURL: 'http://anotherexample.com'});
+
+        mockAdapter = new MockAdapter(instance);
+
+        form = new Form({}, {axios: instance});
+
+        // @link https://github.com/mzabriskie/axios/issues/737
+        expect(Object.keys(form.getAxios()).reduce((acc, prop) => axios.hasOwnProperty(prop), false)).toBe(true);
+        expect(instance.defaults.baseURL).toBe('http://anotherexample.com');
+
+        form = new Form({});
+        expect(axios === form.getAxios()).toBe(true);
+
+    });
+
 });

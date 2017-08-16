@@ -30,6 +30,17 @@ class Form {
         };
     }
 
+   /*
+    * getAxios
+    * retrieves axios, favouring the injected version if present.
+    * @return axios
+    */
+    getAxios() {
+      let options = this.__options;
+      return options.hasOwnProperty('axios') ? options.axios : axios;
+    }
+
+
     /**
      * Fetch all relevant data for the form.
      */
@@ -107,13 +118,15 @@ class Form {
      * @param {string} requestType
      * @param {string} url
      */
-    submit(requestType, url, ajax = axios) {
+    submit(requestType, url) {
         this.validateRequestType(requestType);
         this.errors.clear();
         this.processing = true;
 
+        let axios = this.getAxios();
+
         return new Promise((resolve, reject) => {
-            ajax[requestType](url, this.data())
+            axios[requestType](url, this.data())
                 .then((response) => {
                     this.processing = false;
                     this.onSuccess(response.data);
