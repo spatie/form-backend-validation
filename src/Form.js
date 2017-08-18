@@ -2,10 +2,10 @@ import Errors from './Errors';
 import { isArray } from './util';
 
 const reservedFieldNames = [
-    '__guardAgainstReservedFieldName', '__http', '__options',
-    '__validateRequestType', 'clear', 'data', 'delete', 'errors',
-    'getError', 'hasError', 'initial', 'onFail', 'onSuccess', 'patch',
-    'post', 'processing', 'put', 'reset', 'submit',
+    '__http', '__options', '__validateRequestType', 'clear', 'data', 'delete',
+    'errors', 'getError', 'hasError', 'initial', 'onFail', 'onSuccess',
+    'patch', 'post', 'processing', 'put', 'reset', 'submit', 'withData',
+    'withErrors', 'withOptions',
 ];
 
 class Form {
@@ -15,7 +15,15 @@ class Form {
      * @param {object} data
      * @param {object} options
      */
-    constructor(data, options = {}) {
+    constructor(data = {}, options = {}) {
+        this.processing = false;
+
+        this.withData(data);
+        this.withOptions(options);
+        this.withErrors({});
+    }
+
+    withData(data) {
         if (isArray(data)) {
             data = data.reduce((carry, element) => {
                 carry[element] = '';
@@ -24,15 +32,25 @@ class Form {
         }
 
         this.initial = data;
-        this.errors = new Errors();
-        this.processing = false;
 
         for (const field in data) {
-            this.__guardAgainstReservedFieldName(field);
+            if (reservedFieldNames.indexOf(field) !== -1) {
+                throw new Error(`Field name ${field} isn't allowed to be used in a Form instance.`);
+            }
 
             this[field] = data[field];
         }
 
+        return this;
+    }
+
+    withErrors(errors) {
+        this.errors = new Errors(errors);
+
+        return this;
+    }
+
+    withOptions(options) {
         this.__options = {
             resetOnSuccess: true,
         };
@@ -54,6 +72,8 @@ class Form {
         if (! this.__http) {
             throw new Error('No http library provided. Either pass an http option, or install axios.');
         }
+
+        return this;
     }
 
     /**
@@ -202,10 +222,16 @@ class Form {
         }
     }
 
-    __guardAgainstReservedFieldName(fieldName) {
-        if (reservedFieldNames.indexOf(fieldName) !== -1) {
-            throw new Error(`Field name ${fieldName} isn't allowed to be used in a Form instance.`);
-        }
+    static withData(data) {
+        return (new Form()).withData(data);
+    }
+
+    static withErrors(errors) {
+        return (new Form()).withErrors(errors);
+    }
+
+    static withOptions(options) {
+        return (new Form()).withOptions(options);
     }
 }
 

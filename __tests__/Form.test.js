@@ -51,10 +51,10 @@ describe('Errors', () => {
 
     it('can\'t be initialized with a reserved field name', () => {
         const reservedFieldNames = [
-            '__guardAgainstReservedFieldName', '__http', '__options',
-            '__validateRequestType', 'clear', 'data', 'delete', 'errors',
-            'getError', 'hasError', 'initial', 'onFail', 'onSuccess', 'patch',
-            'post', 'processing', 'put', 'reset', 'submit',
+            '__http', '__options', '__validateRequestType', 'clear', 'data', 'delete',
+            'errors', 'getError', 'hasError', 'initial', 'onFail', 'onSuccess',
+            'patch', 'post', 'processing', 'put', 'reset', 'submit', 'withData',
+            'withErrors', 'withOptions',
         ];
 
         reservedFieldNames.forEach(fieldName => {
@@ -125,5 +125,45 @@ describe('Errors', () => {
         form = new Form({});
 
         expect(form.__http.defaults.baseURL).toBe(undefined);
+    });
+
+    it('can be created with data', () => {
+        form = Form.withData({ foo: 'bar' });
+
+        expect(form.foo).toBe('bar');
+
+        form = new Form();
+        form.withData({ foo: 'bar' });
+
+        expect(form.foo).toBe('bar');
+    });
+
+    it('can be created with errors', () => {
+        form = Form.withErrors({ foo: 'bar' });
+
+        expect(form.errors.get('foo')).toBe('bar');
+
+        form = new Form();
+        form.withErrors({ foo: 'bar' });
+
+        expect(form.errors.get('foo')).toBe('bar');
+    });
+
+    it('can be created with options', () => {
+        const onSuccess = () => {};
+        const onFail = () => {};
+
+        form = Form.withOptions({ resetOnSuccess: false, onSuccess, onFail });
+
+        expect(form.__options.resetOnSuccess).toBe(false);
+        expect(form.onSuccess).toBe(onSuccess);
+        expect(form.onFail).toBe(onFail);
+
+        form = new Form();
+        form.withOptions({ resetOnSuccess: false, onSuccess, onFail });
+
+        expect(form.__options.resetOnSuccess).toBe(false);
+        expect(form.onSuccess).toBe(onSuccess);
+        expect(form.onFail).toBe(onFail);
     });
 });
