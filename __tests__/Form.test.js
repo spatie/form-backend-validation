@@ -16,6 +16,10 @@ describe('Errors', () => {
         mockAdapter = new MockAdapter(axios);
     });
 
+    it('is initializable', () => {
+        form = new Form({}, {});
+    });
+
     it('exposes the passed form field values as properties', () => {
         expect(form.field1).toBe('value 1');
         expect(form.field2).toBe('value 2');
@@ -47,10 +51,10 @@ describe('Errors', () => {
 
     it('can\'t be initialized with a reserved field name', () => {
         const reservedFieldNames = [
-            '__http', '__options', 'clear', 'data', 'delete', 'errors',
-            'getError', 'guardAgainstReservedFieldName', 'hasError', 'initial',
-            'onFail', 'onSuccess', 'patch', 'post', 'processing', 'put',
-            'reset', 'submit', 'validateRequestType',
+            '__guardAgainstReservedFieldName', '__http', '__options',
+            '__validateRequestType', 'clear', 'data', 'delete', 'errors',
+            'getError', 'hasError', 'initial', 'onFail', 'onSuccess', 'patch',
+            'post', 'processing', 'put', 'reset', 'submit',
         ];
 
         reservedFieldNames.forEach(fieldName => {
@@ -60,7 +64,7 @@ describe('Errors', () => {
 
     it('will record the errors that the server passes through', async () => {
         mockAdapter.onPost('http://example.com/posts').reply(422, {
-            'first_name': ['Value is required'],
+            errors: { first_name: ['Value is required'] },
         });
 
         try {
@@ -110,7 +114,6 @@ describe('Errors', () => {
     });
 
     it('can accept a custom http instance in options', () => {
-
         const http = axios.create({ baseURL: 'http://anotherexample.com' });
 
         mockAdapter = new MockAdapter(http);
@@ -123,5 +126,4 @@ describe('Errors', () => {
 
         expect(form.__http.defaults.baseURL).toBe(undefined);
     });
-
 });

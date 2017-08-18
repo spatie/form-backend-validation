@@ -2,10 +2,10 @@ import Errors from './Errors';
 import { isArray } from './util';
 
 const reservedFieldNames = [
-    '__http', '__options', 'clear', 'data', 'delete', 'errors', 'getError',
-    'guardAgainstReservedFieldName', 'hasError', 'initial', 'onFail',
-    'onSuccess', 'patch', 'post', 'processing', 'put', 'reset', 'submit',
-    'validateRequestType',
+    '__guardAgainstReservedFieldName', '__http', '__options',
+    '__validateRequestType', 'clear', 'data', 'delete', 'errors',
+    'getError', 'hasError', 'initial', 'onFail', 'onSuccess', 'patch',
+    'post', 'processing', 'put', 'reset', 'submit',
 ];
 
 class Form {
@@ -15,7 +15,7 @@ class Form {
      * @param {object} data
      * @param {object} options
      */
-    constructor(data, options) {
+    constructor(data, options = {}) {
         if (isArray(data)) {
             data = data.reduce((carry, element) => {
                 carry[element] = '';
@@ -28,25 +28,32 @@ class Form {
         this.processing = false;
 
         for (const field in data) {
-            this.guardAgainstReservedFieldName(field);
+            this.__guardAgainstReservedFieldName(field);
 
             this[field] = data[field];
         }
 
         this.__options = {
             resetOnSuccess: true,
-            ...options,
         };
-    }
 
-    get __http() {
-        const http = this.__options.http || require('axios');
-
-        if (! http) {
-            throw new Error('No http library provided. Either pass an http option, or install axios.');
+        if (options.hasOwnProperty('resetOnSuccess')) {
+            this.__options.resetOnSuccess = options.resetOnSuccess;
         }
 
-        return http;
+        if (options.hasOwnProperty('onSuccess')) {
+            this.onSuccess = options.onSuccess;
+        }
+
+        if (options.hasOwnProperty('onFail')) {
+            this.onFail = options.onFail;
+        }
+
+        this.__http = options.http || require('axios');
+
+        if (! this.__http) {
+            throw new Error('No http library provided. Either pass an http option, or install axios.');
+        }
     }
 
     /**
@@ -127,7 +134,7 @@ class Form {
      * @param {string} url
      */
     submit(requestType, url) {
-        this.validateRequestType(requestType);
+        this.__validateRequestType(requestType);
         this.errors.clear();
         this.processing = true;
 
@@ -149,25 +156,11 @@ class Form {
     }
 
     /**
-     * Validate a request type.
-     *
-     * @param {string} requestType
-     */
-    validateRequestType(requestType) {
-        const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
-
-        if (requestTypes.indexOf(requestType) === -1) {
-            throw new Error(`\`${requestType}\` is not a valid request type, ` +
-                `must be one of: \`${requestTypes.join('\`, \`')}\`.`);
-        }
-    }
-
-    /**
      * Handle a successful form submission.
      *
      * @param {object} data
      */
-    onSuccess() {
+    onSuccess(data) {
         if (this.__options.resetOnSuccess) {
             this.reset();
         }
@@ -176,10 +169,10 @@ class Form {
     /**
      * Handle a failed form submission.
      *
-     * @param {object} errors
+     * @param {object} data
      */
-    onFail(errors) {
-        this.errors.record(errors);
+    onFail(data) {
+        this.errors.record(data.errors);
     }
 
     /**
@@ -200,7 +193,16 @@ class Form {
         return this.errors.get(field);
     }
 
-    guardAgainstReservedFieldName(fieldName) {
+    __validateRequestType(requestType) {
+        const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
+
+        if (requestTypes.indexOf(requestType) === -1) {
+            throw new Error(`\`${requestType}\` is not a valid request type, ` +
+                `must be one of: \`${requestTypes.join('\`, \`')}\`.`);
+        }
+    }
+
+    __guardAgainstReservedFieldName(fieldName) {
         if (reservedFieldNames.indexOf(fieldName) !== -1) {
             throw new Error(`Field name ${fieldName} isn't allowed to be used in a Form instance.`);
         }
