@@ -16,7 +16,7 @@ class Form {
             }, {});
         }
 
-        this.originalData = data;
+        this.initial = data;
         this.errors = new Errors();
         this.processing = false;
 
@@ -46,7 +46,7 @@ class Form {
     data() {
         const data = {};
 
-        for (const property in this.originalData) {
+        for (const property in this.initial) {
             data[property] = this[property];
         }
 
@@ -57,8 +57,8 @@ class Form {
      * Reset the form fields.
      */
     reset() {
-        for (const field in this.originalData) {
-            this[field] = this.originalData[field];
+        for (const field in this.initial) {
+            this[field] = this.initial[field];
         }
 
         this.errors.clear();
@@ -68,7 +68,7 @@ class Form {
      * Clear the form fields.
      */
     clear() {
-        for (const field in this.originalData) {
+        for (const field in this.initial) {
             this[field] = '';
         }
 
@@ -171,6 +171,15 @@ class Form {
      */
     onFail(errors) {
         this.errors.record(errors);
+    }
+
+    /**
+     * Get the error message(s) for the given field.
+     *
+     * @param field
+     */
+    hasError(field) {
+        return this.errors.has(field);
     }
 
     /**
