@@ -18,6 +18,7 @@ describe('Errors', () => {
 
     it('is initializable', () => {
         form = new Form({}, {});
+        form = Form.create({});
     });
 
     it('exposes the passed form field values as properties', () => {
@@ -125,45 +126,5 @@ describe('Errors', () => {
         form = new Form({});
 
         expect(form.__http.defaults.baseURL).toBe(undefined);
-    });
-
-    it('can be created with data', () => {
-        form = Form.withData({ foo: 'bar' });
-
-        expect(form.foo).toBe('bar');
-
-        form = new Form();
-        form.withData({ foo: 'bar' });
-
-        expect(form.foo).toBe('bar');
-    });
-
-    it('can be created with errors', () => {
-        form = Form.withErrors({ foo: 'bar' });
-
-        expect(form.errors.get('foo')).toBe('bar');
-
-        form = new Form();
-        form.withErrors({ foo: 'bar' });
-
-        expect(form.errors.get('foo')).toBe('bar');
-    });
-
-    it('can be created with options', () => {
-        const onSuccess = () => {};
-        const onFail = () => {};
-
-        form = Form.withOptions({ resetOnSuccess: false, onSuccess, onFail });
-
-        expect(form.__options.resetOnSuccess).toBe(false);
-        expect(form.onSuccess).toBe(onSuccess);
-        expect(form.onFail).toBe(onFail);
-
-        form = new Form();
-        form.withOptions({ resetOnSuccess: false, onSuccess, onFail });
-
-        expect(form.__options.resetOnSuccess).toBe(false);
-        expect(form.onSuccess).toBe(onSuccess);
-        expect(form.onFail).toBe(onFail);
     });
 });

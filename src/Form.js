@@ -222,16 +222,8 @@ class Form {
         }
     }
 
-    static withData(data) {
+    static create(data = {}) {
         return (new Form()).withData(data);
-    }
-
-    static withErrors(errors) {
-        return (new Form()).withErrors(errors);
-    }
-
-    static withOptions(options) {
-        return (new Form()).withOptions(options);
     }
 }
 
