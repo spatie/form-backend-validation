@@ -45,6 +45,13 @@ describe('Errors', () => {
         expect(form.field2).toBe('');
     });
 
+    it('can\'t be initialized with a reserved field name', () => {
+        expect(() => new Form({ initial: 'foo' })).toThrow();
+        expect(() => new Form({ errors: 'foo' })).toThrow();
+        expect(() => new Form({ processing: 'foo' })).toThrow();
+        expect(() => new Form({ __options: 'foo' })).toThrow();
+    });
+
     it('will record the errors that the server passes through', async () => {
         mockAdapter.onPost('http://example.com/posts').reply(422, {
             'first_name': ['Value is required'],

@@ -21,6 +21,8 @@ class Form {
         this.processing = false;
 
         for (const field in data) {
+            this.guardAgainstReservedFieldName(field);
+
             this[field] = data[field];
         }
 
@@ -189,6 +191,12 @@ class Form {
      */
     getError(field) {
         return this.errors.get(field);
+    }
+
+    guardAgainstReservedFieldName(fieldName) {
+        if (['initial', 'errors', 'processing', '__options'].indexOf(fieldName) !== -1) {
+            throw new Error(`Field name ${fieldName} isn't allowed to be used in a Form instance.`);
+        }
     }
 }
 
