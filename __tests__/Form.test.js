@@ -46,10 +46,16 @@ describe('Errors', () => {
     });
 
     it('can\'t be initialized with a reserved field name', () => {
-        expect(() => new Form({ initial: 'foo' })).toThrow();
-        expect(() => new Form({ errors: 'foo' })).toThrow();
-        expect(() => new Form({ processing: 'foo' })).toThrow();
-        expect(() => new Form({ __options: 'foo' })).toThrow();
+        const reservedFieldNames = [
+            '__http', '__options', 'clear', 'data', 'delete', 'errors',
+            'getError', 'guardAgainstReservedFieldName', 'hasError', 'initial',
+            'onFail', 'onSuccess', 'patch', 'post', 'processing', 'put',
+            'reset', 'submit', 'validateRequestType',
+        ];
+
+        reservedFieldNames.forEach(fieldName => {
+            expect(() => new Form({ [fieldName]: 'foo' })).toThrow();
+        });
     });
 
     it('will record the errors that the server passes through', async () => {

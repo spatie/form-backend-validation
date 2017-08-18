@@ -1,6 +1,13 @@
 import Errors from './Errors';
 import { isArray } from './util';
 
+const reservedFieldNames = [
+    '__http', '__options', 'clear', 'data', 'delete', 'errors', 'getError',
+    'guardAgainstReservedFieldName', 'hasError', 'initial', 'onFail',
+    'onSuccess', 'patch', 'post', 'processing', 'put', 'reset', 'submit',
+    'validateRequestType',
+];
+
 class Form {
     /**
      * Create a new Form instance.
@@ -194,7 +201,7 @@ class Form {
     }
 
     guardAgainstReservedFieldName(fieldName) {
-        if (['initial', 'errors', 'processing', '__options'].indexOf(fieldName) !== -1) {
+        if (reservedFieldNames.indexOf(fieldName) !== -1) {
             throw new Error(`Field name ${fieldName} isn't allowed to be used in a Form instance.`);
         }
     }
