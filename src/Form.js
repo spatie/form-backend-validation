@@ -1,12 +1,5 @@
 import Errors from './Errors';
-import { isArray } from './util';
-
-const reservedFieldNames = [
-    '__http', '__options', '__validateRequestType', 'clear', 'data', 'delete',
-    'errors', 'getError', 'hasError', 'initial', 'onFail', 'onSuccess',
-    'patch', 'post', 'processing', 'put', 'reset', 'submit', 'withData',
-    'withErrors', 'withOptions',
-];
+import { guardAgainstReservedFieldName, isArray } from './util';
 
 class Form {
     /**
@@ -18,9 +11,9 @@ class Form {
     constructor(data = {}, options = {}) {
         this.processing = false;
 
-        this.withData(data);
-        this.withOptions(options);
-        this.withErrors({});
+        this.withData(data)
+            .withOptions(options)
+            .withErrors({});
     }
 
     withData(data) {
@@ -34,9 +27,7 @@ class Form {
         this.initial = data;
 
         for (const field in data) {
-            if (reservedFieldNames.indexOf(field) !== -1) {
-                throw new Error(`Field name ${field} isn't allowed to be used in a Form instance.`);
-            }
+            guardAgainstReservedFieldName(field);
 
             this[field] = data[field];
         }

@@ -42,9 +42,9 @@ describe('Errors', () => {
 
         errors.record({ 'first_name': ['Value is required'] });
 
-        expect(errors.get('first_name')).toEqual('Value is required');
+        expect(errors.first('first_name')).toEqual('Value is required');
 
-        expect(errors.get('last_name')).toBeUndefined();
+        expect(errors.first('last_name')).toBeUndefined();
     });
 
     it('can clear all the errors', () => {
@@ -92,21 +92,12 @@ describe('Errors', () => {
         expect(errors.has('dates.1.start_date')).toBe(true);
     });
 
-    it('can handle errors that are returned as string', () => {
-        errors.record({
-            'person.first_name': 'Value is required',
-        });
-
-        expect(errors.has('person.first_name')).toBe(true);
-        expect(errors.get('person.first_name')).toEqual('Value is required');
-    });
-
     it('can accept an object of errors in its constructor', () => {
         errors = new Errors({
             first_name: ['Value is required'],
         });
 
-        expect(errors.get('first_name')).toEqual('Value is required');
+        expect(errors.first('first_name')).toEqual('Value is required');
     });
 
     it('can assign an empty object in its constructor if no errors are passed', () => {

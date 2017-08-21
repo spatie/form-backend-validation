@@ -2,8 +2,8 @@ class Errors {
     /**
      * Create a new Errors instance.
      */
-    constructor(errors) {
-        this.errors = errors ? errors : {};
+    constructor(errors = {}) {
+        this.record(errors);
     }
 
     /**
@@ -34,6 +34,16 @@ class Errors {
         return hasError;
     }
 
+    first(field) {
+        return this.has(field)
+            ? this.errors[field][0]
+            : undefined;
+    }
+
+    get(field) {
+        return this.errors[field];
+    }
+
     /**
      * Determine if we have any errors.
      */
@@ -42,25 +52,11 @@ class Errors {
     }
 
     /**
-     * Retrieve the error message for a field.
-     *
-     * @param {string} field
-     */
-    get(field) {
-        if (this.errors[field]) {
-            if (typeof this.errors[field] === 'string') {
-                return this.errors[field];
-            }
-            return this.errors[field][0];
-        }
-    }
-
-    /**
      * Record the new errors.
      *
      * @param {object} errors
      */
-    record(errors) {
+    record(errors = {}) {
         this.errors = errors;
     }
 
