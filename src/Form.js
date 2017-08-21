@@ -159,9 +159,9 @@ class Form {
                 })
                 .catch((error) => {
                     this.processing = false;
-                    this.onFail(error.response.data);
+                    this.onFail(error);
 
-                    reject(error.response);
+                    reject(error);
                 });
         });
     }
@@ -182,8 +182,10 @@ class Form {
      *
      * @param {object} data
      */
-    onFail(data) {
-        this.errors.record(data.errors);
+    onFail(error) {
+        if (error.response && error.response.data.errors) {
+            this.errors.record(error.response.data.errors);
+        }
     }
 
     /**
