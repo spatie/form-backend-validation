@@ -3,7 +3,7 @@
 [![Latest Version on NPM](https://img.shields.io/npm/v/form-backend-validation.svg?style=flat-square)](https://npmjs.com/package/form-backend-validation)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/spatie/form-backend-validation/master.svg?style=flat-square)](https://travis-ci.org/spatie/form-backend-validation)
-[![npm](https://img.shields.io/npm/dt/form-backend-validation.svg?style=flat-square)]()
+[![npm](https://img.shields.io/npm/dt/form-backend-validation.svg?style=flat-square)](https://npmjs.com/package/form-backend-validation)
 
 Wouldn't it be great if you could just use your back end to validate forms on the front end? This package provides a `Form` class does exactly that. It can post itself to a configured endpoint and manage errors. The class meant to be used with a Laravel back end.
 
@@ -42,7 +42,7 @@ You find an example implementation with Laravel and Vue in the [spatie/form-back
 ```js
 import Form from 'form-backend-validation';
 
-// instantiate a form class with some value
+// Instantiate a form class with some values
 const form = new Form({
     field1: 'value 1',
     field2: 'value 2',
@@ -52,47 +52,51 @@ const form = new Form({
     },
 });
 
-// a form can also be initiated with an array
+// A form can also be initiated with an array
 const form = new Form(['field1', 'field2']);
 
-// submitting the form, you can also use `.put`, `.patch` and `.delete`
+// Submit the form, you can also use `.put`, `.patch` and `.delete`
 form.post(anUrl)
    .then(response => ...)
    .catch(response => ...);
 
-// returns true if request is being executed
+// Returns true if request is being executed
 form.processing;
 
+// If there were any validation errors, you easily access them
 
-// if there were any errors, you can get to them easily
-
-// example errors object
-{ 
-    'field1': ['Value is required'], // single field
-    'person.first_name': ['Value is required'], // field in person object
+// Example error response (json)
+{
+    "errors": {
+        "field1": ['Value is required'],
+        "field2": ['Value is required']
+    }
 }
 
-// returns an object in which the keys are the field names 
+// Returns an object in which the keys are the field names 
 // and the values array with error message sent by the server
-form.errors.all() 
+form.errors.all();
 
-// returns true if there were any error
-form.errors.any(); 
+// Returns true if there were any error
+form.errors.any();
 
-// returns true if there is an error for the given field name or object
-form.errors.has(key)
+// Returns true if there is an error for the given field name or object
+form.errors.has(key);
 
-// returns an array with errors for the given field name
-form.errors.get(key)
+// Returns the first error for the given field name
+form.errors.get(key);
 
-// shortcut for getting the erros for the given field name
-form.getError(key)
+// Returns an array with errors for the given field name
+form.errors.get(key);
 
-// clear all errors
-form.errors.clear()
+// Shortcut for getting the errors for the given field name
+form.getError(key);
 
-// clear the error of the given field name or all errors on the given object
-form.errors.clear(key)
+// Clear all errors
+form.errors.clear();
+
+// Clear the error of the given field name or all errors on the given object
+form.errors.clear(key);
 ```
 
 ### Options
@@ -106,6 +110,17 @@ const form = new Form({
 }, {
     resetOnSuccess: false,
 });
+```
+
+You can also pass options via a `withOptions` method (this example uses the `create` factory method.
+
+```
+const form = Form.create()
+    .withOptions({ resetOnSuccess: false })
+    .withData({
+        field1: 'value 1',
+        field2: 'value 2',
+    });
 ```
 
 #### `resetOnSuccess: bool`
@@ -147,11 +162,13 @@ If you discover any security related issues, please contact [Freek Van der Herte
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
+- [Sebastian De Deyne](https://github.com/sebastiandedeyne)
 - [All Contributors](../../contributors)
 
 Initial code of this package was copied from [Jeffrey Way](https://twitter.com/jeffrey_way)'s [Vue-Forms repo](https://github.com/laracasts/Vue-Forms/)
 
 ## About Spatie
+
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## License
