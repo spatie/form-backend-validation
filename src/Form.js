@@ -26,6 +26,9 @@ class Form {
 
         this.initial = data;
 
+        this.errors = new Errors();
+        this.processing = false;
+
         for (const field in data) {
             guardAgainstReservedFieldName(field);
 
@@ -89,6 +92,12 @@ class Form {
         }
 
         this.errors.clear();
+    }
+
+    setInitialValues(values) {
+        for (const property in values) {
+            this.initial[property] = values[property];
+        }
     }
 
     /**
