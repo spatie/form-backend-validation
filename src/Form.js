@@ -16,7 +16,7 @@ class Form {
             }, {});
         }
 
-        this.originalData = data;
+        this.initial = data;
         this.errors = new Errors();
         this.processing = false;
 
@@ -46,7 +46,7 @@ class Form {
     data() {
         const data = {};
 
-        for (const property in this.originalData) {
+        for (const property in this.initial) {
             data[property] = this[property];
         }
 
@@ -57,18 +57,24 @@ class Form {
      * Reset the form fields.
      */
     reset() {
-        for (const field in this.originalData) {
-            this[field] = this.originalData[field];
+        for (const field in this.initial) {
+            this[field] = this.initial[field];
         }
 
         this.errors.clear();
+    }
+
+    setInitialValues(values) {
+        for (const property in values) {
+            this.initial[property] = values[property];
+        }
     }
 
     /**
      * Clear the form fields.
      */
     clear() {
-        for (const field in this.originalData) {
+        for (const field in this.initial) {
             this[field] = '';
         }
 

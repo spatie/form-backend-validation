@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 1.8.0 - 2017-08-23
+- Added: `setInitialValues`
+
 ## 1.7.0 - 2017-08-16
 - Added: You can now use your own http library by passing an `http` option
 - Changed: Axios is now an optional dependency

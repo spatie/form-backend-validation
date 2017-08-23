@@ -31,6 +31,15 @@ describe('Errors', () => {
         expect(form.field2).toEqual('value 2');
     });
 
+    it('can use the current data as the new initial values', () => {
+        form.setInitialValues({ field1: 'new initial' });
+
+        form.reset();
+
+        expect(form.field1).toBe('new initial');
+    });
+
+
     it('can clear the form values', () => {
         form.clear();
 

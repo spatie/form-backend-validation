@@ -93,6 +93,12 @@ form.errors.clear()
 
 // clear the error of the given field name or all errors on the given object
 form.errors.clear(key)
+
+// Reset the values of the form to those passed to the constructor
+form.reset();
+
+// Set the values which should be used when calling reset()
+form.setInitialValues();
 ```
 
 ### Options
