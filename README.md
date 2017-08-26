@@ -84,7 +84,7 @@ form.errors.any();
 form.errors.has(key);
 
 // Returns the first error for the given field name
-form.errors.get(key);
+form.errors.first(key);
 
 // Returns an array with errors for the given field name
 form.errors.get(key);
