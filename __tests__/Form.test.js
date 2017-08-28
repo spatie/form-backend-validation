@@ -61,10 +61,10 @@ describe('Errors', () => {
 
     it('can\'t be initialized with a reserved field name', () => {
         const reservedFieldNames = [
-            '__http', '__options', '__validateRequestType', 'clear', 'data', 'delete',
-            'errors', 'getError', 'hasError', 'initial', 'onFail', 'onSuccess',
-            'patch', 'post', 'processing', 'put', 'reset', 'submit', 'withData',
-            'withErrors', 'withOptions',
+            '__http', '__options', '__validateRequestType', 'clear', 'data',
+            'delete', 'errors', 'getError', 'getErrors', 'hasError', 'initial',
+            'onFail', 'onSuccess', 'patch', 'post', 'processing', 'put',
+            'reset', 'submit', 'withData', 'withErrors', 'withOptions',
         ];
 
         reservedFieldNames.forEach(fieldName => {
@@ -120,7 +120,14 @@ describe('Errors', () => {
     });
 
     it('can get an error message for a field', () => {
-        expect(form.getError('field1')).toBe(undefined);
+        form = Form.create({ field1: '', field2: '' })
+            .withErrors({ field1: [], field2: ['Field 2 is required', 'Field 2 must be an e-mail'] });
+
+        expect(form.getError('field1')).toEqual(undefined);
+        expect(form.getErrors('field1')).toEqual([]);
+
+        expect(form.getError('field2')).toEqual('Field 2 is required');
+        expect(form.getErrors('field2')).toEqual(['Field 2 is required', 'Field 2 must be an e-mail']);
     });
 
     it('can accept a custom http instance in options', () => {

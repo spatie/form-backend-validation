@@ -207,11 +207,22 @@ class Form {
     }
 
     /**
-     * Get the error message(s) for the given field.
+     * Get the first error message for the given field.
      *
-     * @param field
+     * @param {string} field
+     * @return {string}
      */
     getError(field) {
+        return this.errors.first(field);
+    }
+
+    /**
+     * Get the error messages for the given field.
+     *
+     * @param {string} field
+     * @return {array}
+     */
+    getErrors(field) {
         return this.errors.get(field);
     }
 

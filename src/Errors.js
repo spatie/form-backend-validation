@@ -35,13 +35,11 @@ class Errors {
     }
 
     first(field) {
-        return this.has(field)
-            ? this.errors[field][0]
-            : undefined;
+        return this.get(field)[0];
     }
 
     get(field) {
-        return this.errors[field];
+        return this.errors[field] || [];
     }
 
     /**

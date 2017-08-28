@@ -4,9 +4,9 @@ export function isArray(object) {
 
 const reservedFieldNames = [
     '__http', '__options', '__validateRequestType', 'clear', 'data', 'delete',
-    'errors', 'getError', 'hasError', 'initial', 'onFail', 'onSuccess',
-    'patch', 'post', 'processing', 'put', 'reset', 'submit', 'withData',
-    'withErrors', 'withOptions',
+    'errors', 'getError', 'getErrors', 'hasError', 'initial', 'onFail',
+    'onSuccess', 'patch', 'post', 'processing', 'put', 'reset', 'submit',
+    'withData', 'withErrors', 'withOptions',
 ];
 
 export function guardAgainstReservedFieldName(fieldName) {
