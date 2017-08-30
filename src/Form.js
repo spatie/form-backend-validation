@@ -1,5 +1,5 @@
 import Errors from './Errors';
-import { isArray } from './util';
+import { guardAgainstReservedFieldName, isArray } from './util';
 
 class Form {
     /**
@@ -8,7 +8,15 @@ class Form {
      * @param {object} data
      * @param {object} options
      */
-    constructor(data, options) {
+    constructor(data = {}, options = {}) {
+        this.processing = false;
+
+        this.withData(data)
+            .withOptions(options)
+            .withErrors({});
+    }
+
+    withData(data) {
         if (isArray(data)) {
             data = data.reduce((carry, element) => {
                 carry[element] = '';
@@ -17,27 +25,49 @@ class Form {
         }
 
         this.initial = data;
+
         this.errors = new Errors();
         this.processing = false;
 
         for (const field in data) {
+            guardAgainstReservedFieldName(field);
+
             this[field] = data[field];
         }
 
-        this.__options = {
-            resetOnSuccess: true,
-            ...options,
-        };
+        return this;
     }
 
-    get __http() {
-        const http = this.__options.http || require('axios');
+    withErrors(errors) {
+        this.errors = new Errors(errors);
 
-        if (! http) {
+        return this;
+    }
+
+    withOptions(options) {
+        this.__options = {
+            resetOnSuccess: true,
+        };
+
+        if (options.hasOwnProperty('resetOnSuccess')) {
+            this.__options.resetOnSuccess = options.resetOnSuccess;
+        }
+
+        if (options.hasOwnProperty('onSuccess')) {
+            this.onSuccess = options.onSuccess;
+        }
+
+        if (options.hasOwnProperty('onFail')) {
+            this.onFail = options.onFail;
+        }
+
+        this.__http = options.http || require('axios');
+
+        if (! this.__http) {
             throw new Error('No http library provided. Either pass an http option, or install axios.');
         }
 
-        return http;
+        return this;
     }
 
     /**
@@ -124,7 +154,7 @@ class Form {
      * @param {string} url
      */
     submit(requestType, url) {
-        this.validateRequestType(requestType);
+        this.__validateRequestType(requestType);
         this.errors.clear();
         this.processing = true;
 
@@ -138,25 +168,11 @@ class Form {
                 })
                 .catch((error) => {
                     this.processing = false;
-                    this.onFail(error.response.data);
+                    this.onFail(error);
 
-                    reject(error.response);
+                    reject(error);
                 });
         });
-    }
-
-    /**
-     * Validate a request type.
-     *
-     * @param {string} requestType
-     */
-    validateRequestType(requestType) {
-        const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
-
-        if (requestTypes.indexOf(requestType) === -1) {
-            throw new Error(`\`${requestType}\` is not a valid request type, ` +
-                `must be one of: \`${requestTypes.join('\`, \`')}\`.`);
-        }
     }
 
     /**
@@ -164,7 +180,7 @@ class Form {
      *
      * @param {object} data
      */
-    onSuccess() {
+    onSuccess(data) {
         if (this.__options.resetOnSuccess) {
             this.reset();
         }
@@ -173,10 +189,12 @@ class Form {
     /**
      * Handle a failed form submission.
      *
-     * @param {object} errors
+     * @param {object} data
      */
-    onFail(errors) {
-        this.errors.record(errors);
+    onFail(error) {
+        if (error.response && error.response.data.errors) {
+            this.errors.record(error.response.data.errors);
+        }
     }
 
     /**
@@ -184,8 +202,41 @@ class Form {
      *
      * @param field
      */
+    hasError(field) {
+        return this.errors.has(field);
+    }
+
+    /**
+     * Get the first error message for the given field.
+     *
+     * @param {string} field
+     * @return {string}
+     */
     getError(field) {
+        return this.errors.first(field);
+    }
+
+    /**
+     * Get the error messages for the given field.
+     *
+     * @param {string} field
+     * @return {array}
+     */
+    getErrors(field) {
         return this.errors.get(field);
+    }
+
+    __validateRequestType(requestType) {
+        const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
+
+        if (requestTypes.indexOf(requestType) === -1) {
+            throw new Error(`\`${requestType}\` is not a valid request type, ` +
+                `must be one of: \`${requestTypes.join('\`, \`')}\`.`);
+        }
+    }
+
+    static create(data = {}) {
+        return (new Form()).withData(data);
     }
 }
 

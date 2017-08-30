@@ -2,8 +2,18 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+
+## 2.0.0 - 2017-08-30
+- Added: Static `create` method, and fluent `withData`, `withOptions`, `withErrors` methods
+- Added: `onSuccess` and `onFail` can now be set by passing them as an option to the form
+- Changed: `Errors.get` has been renamed to `Errors.first`, `get` now returns all of a field's errors
+- Changed: `Form.getError` is equivalent to `Errors.first`, `Form.getErrors` to `Errors.get`
+- Changed: Responses must follow Laravel 5.5's error response format (see https://laravel.com/docs/5.5/upgrade)
+- Changed: `onFail` and `catch` on request promises now return a full error object instead of the response data
+
 ## 1.8.0 - 2017-08-23
 - Added: `setInitialValues`
+
 
 ## 1.7.0 - 2017-08-16
 - Added: You can now use your own http library by passing an `http` option
