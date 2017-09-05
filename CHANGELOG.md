@@ -2,6 +2,8 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.0.1 - 2017-09-05
+- Fixed: Errors for an array of fields are now passed to the Form errors
 
 ## 2.0.0 - 2017-08-30
 - Added: Static `create` method, and fluent `withData`, `withOptions`, `withErrors` methods
