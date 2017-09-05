@@ -26,7 +26,7 @@ class Errors {
         if (! hasError) {
             const errors = Object
                 .keys(this.errors)
-                .filter(e => e.startsWith(`${field}.`));
+                .filter(e => e.startsWith(`${field}.`) || e.startsWith(`${field}[`));
 
             hasError = errors.length > 0;
         }
