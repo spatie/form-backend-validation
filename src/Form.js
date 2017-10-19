@@ -1,4 +1,5 @@
 import Errors from './Errors';
+import merge from 'lodash.merge';
 import { guardAgainstReservedFieldName, isArray } from './util';
 
 class Form {
@@ -87,16 +88,15 @@ class Form {
      * Reset the form fields.
      */
     reset() {
-        for (const field in this.initial) {
-            this[field] = this.initial[field];
-        }
+        merge(this, this.initial);
 
         this.errors.clear();
     }
 
     setInitialValues(values) {
-        // Create a deep copy of the object to avoid mutating nested objects.
-        this.initial = JSON.parse(JSON.stringify(values));
+        this.initial = {};
+
+        merge(this.initial, values);
     }
 
     /**

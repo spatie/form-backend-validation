@@ -59,6 +59,20 @@ describe('Errors', () => {
         expect(form.initial.address.street).toBe('Samberstraat');
     });
 
+    it('resets with a copy for initial values to avoid mutation', () => {
+        form = new Form({ address: { street: 'Samberstraat' } });
+
+        form.address.street = 'Langestraat';
+
+        form.reset();
+        expect(form.address.street).toBe('Samberstraat');
+
+        form.address.street = 'Langestraat';
+
+        // form.reset();
+        // expect(form.address.street).toBe('Samberstraat');
+    });
+
     it('can clear the form values', () => {
         form.clear();
 
