@@ -51,6 +51,13 @@ describe('Errors', () => {
         expect(form.field1).toBe('new initial');
     });
 
+    it('uses a copy for initial values to avoid mutation', () => {
+        form = new Form({ address: { street: 'Samberstraat' } });
+
+        form.address.street = 'Langestraat';
+
+        expect(form.initial.address.street).toBe('Samberstraat');
+    });
 
     it('can clear the form values', () => {
         form.clear();

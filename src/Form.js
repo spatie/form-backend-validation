@@ -24,7 +24,7 @@ class Form {
             }, {});
         }
 
-        this.initial = data;
+        this.setInitialValues(data);
 
         this.errors = new Errors();
         this.processing = false;
@@ -95,9 +95,8 @@ class Form {
     }
 
     setInitialValues(values) {
-        for (const property in values) {
-            this.initial[property] = values[property];
-        }
+        // Create a deep copy of the object to avoid mutating nested objects.
+        this.initial = JSON.parse(JSON.stringify(values));
     }
 
     /**
