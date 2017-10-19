@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.0.2 - 2017-10-19
+- Fixed: A bug that would mutate initial values when using nested objects
+
 ## 2.0.1 - 2017-09-05
 - Fixed: Errors for an array of fields are now passed to the Form errors
 
