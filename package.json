@@ -1,6 +1,6 @@
 {
   "name": "form-backend-validation",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "An easy way to validate forms using back end logic",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
@@ -31,9 +31,6 @@
   "optionalDependencies": {
     "axios": ">=0.15 <1.0"
   },
-  "peerDependencies": {
-    "vue": "^2.0.3"
-  },
   "devDependencies": {
     "axios": ">=0.15 <1.0",
     "axios-mock-adapter": "^1.7.1",
@@ -44,8 +41,7 @@
     "babel-preset-es2015": "^6.9.0",
     "eslint": "^3.7.1",
     "eslint-config-spatie": "^1.2.7",
-    "jest": "^18.0.0",
-    "vue": "^2.1.7"
+    "jest": "^18.0.0"
   },
   "jest": {
     "testRegex": "test.js$"

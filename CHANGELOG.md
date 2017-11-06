@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.0.3 - 2017-11-06
+- Fixed: Removed unnecessary Vue dependency
+
 ## 2.0.2 - 2017-10-19
 - Fixed: A bug that would mutate initial values when using nested objects
 
