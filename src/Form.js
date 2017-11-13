@@ -62,7 +62,7 @@ class Form {
             this.onFail = options.onFail;
         }
 
-        this.__http = options.http || require('axios');
+        this.__http = options.http || window.axios || require('axios');
 
         if (! this.__http) {
             throw new Error('No http library provided. Either pass an http option, or install axios.');
