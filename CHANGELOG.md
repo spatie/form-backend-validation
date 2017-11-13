@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.0.4 - 2017-11-13
+- Changed: Look for `axios` on `window` as the http client
+
 ## 2.0.3 - 2017-11-06
 - Fixed: Removed unnecessary Vue dependency
 
