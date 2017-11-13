@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.0.5 - 2017-11-13
+- Fixed: Republished because 2.0.4 changes didn't come through
+
 ## 2.0.4 - 2017-11-13
 - Changed: Look for `axios` on `window` as the http client
 
