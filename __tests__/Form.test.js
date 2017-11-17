@@ -84,7 +84,7 @@ describe('Errors', () => {
         const reservedFieldNames = [
             '__http', '__options', '__validateRequestType', 'clear', 'data',
             'delete', 'errors', 'getError', 'getErrors', 'hasError', 'initial',
-            'onFail', 'onSuccess', 'patch', 'post', 'processing', 'put',
+            'onFail', 'onSuccess', 'patch', 'post', 'processing', 'successful', 'put',
             'reset', 'submit', 'withData', 'withErrors', 'withOptions',
         ];
 
@@ -138,6 +138,16 @@ describe('Errors', () => {
         form.errors.record({ field1: ['Value is required'] });
 
         expect(form.hasError('field1')).toBe(true);
+    });
+
+    it('can be successfully completed', async () => {
+        mockAdapter.onPost('http://example.com/posts').reply(200, {});
+
+        form = new Form();
+
+        await form.submit('post', 'http://example.com/posts');
+
+        expect(form.successful).toBe(true);
     });
 
     it('can get an error message for a field', () => {
