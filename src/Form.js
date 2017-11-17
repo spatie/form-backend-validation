@@ -107,6 +107,8 @@ class Form {
                 this[field] = data[field];
             }
         });
+        
+        return this;
     }
 
     /**
