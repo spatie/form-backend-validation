@@ -75,8 +75,8 @@ describe('Errors', () => {
 
         form.address.street = 'Langestraat';
 
-        // form.reset();
-        // expect(form.address.street).toBe('Samberstraat');
+        form.reset();
+        expect(form.address.street).toBe('Samberstraat');
     });
 
     it('can clear the form values', () => {
