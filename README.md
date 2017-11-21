@@ -27,7 +27,7 @@ $ yarn add axios
 
 ## Usage
 
-You find an example implementation with Laravel and Vue in the [spatie/form-backend-validation-example-app repo](https://github.com/spatie/form-backend-validation-example-app). 
+You find an example implementation with Laravel and Vue in the [spatie/form-backend-validation-example-app repo](https://github.com/spatie/form-backend-validation-example-app).
 
 ![Screenshot](https://raw.githubusercontent.com/spatie/form-backend-validation-example-app/master/public/images/screenshot.png)
 
@@ -65,7 +65,7 @@ form.processing;
     }
 }
 
-// Returns an object in which the keys are the field names 
+// Returns an object in which the keys are the field names
 // and the values array with error message sent by the server
 form.errors.all();
 
@@ -96,6 +96,17 @@ form.reset();
 
 // Set the values which should be used when calling reset()
 form.setInitialValues();
+
+// Populate a form after its instantiation, the populated fields won't override the initial fields
+// Fields not present at instantiation will not be populated
+const form = new Form({
+    field1: '',
+    field2: '',
+});
+form.populate({
+    field1: 'foo',
+    field2: 'bar',
+});
 
 ```
 
@@ -181,7 +192,7 @@ The idea to go about this way of validating forms comes from [Laravel Spark](htt
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
+Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie).
 All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License

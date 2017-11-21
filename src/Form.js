@@ -100,6 +100,18 @@ class Form {
         merge(this.initial, values);
     }
 
+    populate(data) {
+        Object.keys(data).forEach((field) => {
+            guardAgainstReservedFieldName(field);
+
+            if (this.hasOwnProperty(field)) {
+                this[field] = data[field];
+            }
+        });
+        
+        return this;
+    }
+
     /**
      * Clear the form fields.
      */
