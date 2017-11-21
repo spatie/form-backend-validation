@@ -59,7 +59,7 @@ describe('Errors', () => {
         expect(form.initial.address.street).toBe('Samberstraat');
     });
 
-    it('resets with a copy for initial values to avoid mutation', () => {
+    it('resets with a copy for initial values to avoid object mutation', () => {
         form = new Form({ address: { street: 'Samberstraat' } });
 
         form.address.street = 'Langestraat';
@@ -67,10 +67,28 @@ describe('Errors', () => {
         form.reset();
         expect(form.address.street).toBe('Samberstraat');
 
+        // Assert again to ensure the values in the `reset` aren't mutable
+
         form.address.street = 'Langestraat';
 
         form.reset();
         expect(form.address.street).toBe('Samberstraat');
+    });
+
+    it('resets with a copy for initial values to avoid array mutation', () => {
+        form = new Form({ jobs: ['developer'] });
+
+        form.jobs.push('designer');
+
+        form.reset();
+        expect(form.jobs).toEqual(['developer']);
+
+        // Assert again to ensure the values in the `reset` aren't mutable
+
+        form.jobs.push('designer');
+
+        form.reset();
+        expect(form.jobs).toEqual(['developer']);
     });
 
     it('can clear the form values', () => {

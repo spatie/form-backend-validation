@@ -1,6 +1,5 @@
 import Errors from './Errors';
-import merge from 'lodash.merge';
-import { guardAgainstReservedFieldName, isArray } from './util';
+import { guardAgainstReservedFieldName, isArray, merge, cloneDeep } from './util';
 
 class Form {
     /**
