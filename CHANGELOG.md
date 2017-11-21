@@ -2,12 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
-## 2.2.0 - 2017-11-21
+## 2.1.0 - 2017-11-21
+- Added: `successful` state property
 - Added: `populate` method to fill the form with values without overwriting the initial values
 - Fixed: A bug that would mutate initial values when using arrays
-
-## 2.1.0 - 2017-11-18
-- Added: `successful` state property
 
 ## 2.0.5 - 2017-11-13
 - Fixed: Republished because 2.0.4 changes didn't come through
