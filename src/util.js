@@ -2,11 +2,11 @@ export function isArray(object) {
     return Object.prototype.toString.call(object) === '[object Array]';
 }
 
-const reservedFieldNames = [
+export const reservedFieldNames = [
     '__http', '__options', '__validateRequestType', 'clear', 'data', 'delete',
     'errors', 'getError', 'getErrors', 'hasError', 'initial', 'onFail',
-    'onSuccess', 'patch', 'post', 'processing', 'successful', 'put', 'reset', 'submit',
-    'withData', 'withErrors', 'withOptions',
+    'onSuccess', 'patch', 'populate', 'post', 'processing', 'successful',
+    'put', 'reset', 'submit', 'withData', 'withErrors', 'withOptions',
 ];
 
 export function guardAgainstReservedFieldName(fieldName) {

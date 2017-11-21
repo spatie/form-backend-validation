@@ -1,15 +1,10 @@
+import axios from 'axios';
 import Form from '../src/Form';
 import MockAdapter from 'axios-mock-adapter';
-import axios from 'axios';
+import { reservedFieldNames } from '../src/util';
 
 let form;
 let mockAdapter;
-const reservedFieldNames = [
-    '__http', '__options', '__validateRequestType', 'clear', 'data',
-    'delete', 'errors', 'getError', 'getErrors', 'hasError', 'initial',
-    'onFail', 'onSuccess', 'patch', 'post', 'processing', 'put',
-    'reset', 'submit', 'withData', 'withErrors', 'withOptions',
-];
 
 describe('Errors', () => {
 
@@ -105,13 +100,6 @@ describe('Errors', () => {
     });
 
     it('can\'t be initialized with a reserved field name', () => {
-        const reservedFieldNames = [
-            '__http', '__options', '__validateRequestType', 'clear', 'data',
-            'delete', 'errors', 'getError', 'getErrors', 'hasError', 'initial',
-            'onFail', 'onSuccess', 'patch', 'post', 'processing', 'successful', 'put',
-            'reset', 'submit', 'withData', 'withErrors', 'withOptions',
-        ];
-      
         reservedFieldNames.forEach(fieldName => {
             expect(() => new Form({ [fieldName]: 'foo' })).toThrow();
         });

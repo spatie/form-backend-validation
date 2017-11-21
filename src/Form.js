@@ -105,10 +105,10 @@ class Form {
             guardAgainstReservedFieldName(field);
 
             if (this.hasOwnProperty(field)) {
-                this[field] = data[field];
+                merge(this, { [field]: data[field] });
             }
         });
-        
+
         return this;
     }
 
