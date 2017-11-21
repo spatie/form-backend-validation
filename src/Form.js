@@ -11,6 +11,7 @@ class Form {
      */
     constructor(data = {}, options = {}) {
         this.processing = false;
+        this.successful = false;
 
         this.withData(data)
             .withOptions(options)
@@ -29,6 +30,7 @@ class Form {
 
         this.errors = new Errors();
         this.processing = false;
+        this.successful = false;
 
         for (const field in data) {
             guardAgainstReservedFieldName(field);
@@ -168,6 +170,7 @@ class Form {
         this.__validateRequestType(requestType);
         this.errors.clear();
         this.processing = true;
+        this.successful = false;
 
         return new Promise((resolve, reject) => {
             this.__http[requestType](url, this.data())
@@ -192,6 +195,8 @@ class Form {
      * @param {object} data
      */
     onSuccess(data) {
+        this.successful = true;
+
         if (this.__options.resetOnSuccess) {
             this.reset();
         }
@@ -203,6 +208,8 @@ class Form {
      * @param {object} data
      */
     onFail(error) {
+        this.successful = false;
+
         if (error.response && error.response.data.errors) {
             this.errors.record(error.response.data.errors);
         }

@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.1.0 - 2017-11-18
+- Added: successful state property
+
 ## 2.0.5 - 2017-11-13
 - Fixed: Republished because 2.0.4 changes didn't come through
 
