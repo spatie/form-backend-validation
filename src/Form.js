@@ -86,6 +86,22 @@ class Form {
     }
 
     /**
+     * Fetch specific data for the form.
+     *
+     * @param {array} fields
+     * @return {object}
+     */
+    only(fields) {
+        const data = {};
+
+        fields.forEach(property => {
+            data[property] = this[property];
+        });
+
+        return data;
+    }
+
+    /**
      * Reset the form fields.
      */
     reset() {
