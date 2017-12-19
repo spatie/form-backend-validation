@@ -34,7 +34,7 @@ describe('Errors', () => {
         expect(form.initial.field1).toBe('value 1');
     });
 
-    it('should only return the specified properties of an object', () => {
+    it('should only return the specified fields', () => {
         const filtered = form.only(['field2']);
 
         expect(filtered).toEqual({ field2: 'value 2' });
