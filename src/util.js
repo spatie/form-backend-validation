@@ -42,3 +42,30 @@ export function cloneDeep(object) {
 
     return object;
 }
+
+export function objectToFormData(object, formData, namespace) {
+    formData = formData || new FormData();
+    let key;
+
+    for (const property in object) {
+        if (namespace) {
+            key = namespace + '[' + property + ']';
+        } else {
+            key = property;
+        }
+
+        const value = object[property];
+
+        if (value instanceof Date) {
+            formData.append(key, value.toISOString());
+        } else if (typeof value === 'object' && !(value instanceof File)) {
+            objectToFormData(value, formData, key);
+        } else if (value instanceof File) {
+            formData.append(key, value, value.name);
+        } else {
+            formData.append(key, value);
+        }
+    }
+
+    return formData;
+}
