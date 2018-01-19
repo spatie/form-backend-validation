@@ -92,13 +92,10 @@ class Form {
      * @return {object}
      */
     only(fields) {
-        const data = {};
-
-        fields.forEach(property => {
-            data[property] = this[property];
-        });
-
-        return data;
+        return fields.reduce((filtered, field) => {
+            filtered[field] = this[field];
+            return filtered;
+        }, {});
     }
 
     /**
