@@ -4,7 +4,7 @@ export function isArray(object) {
 
 export const reservedFieldNames = [
     '__http', '__options', '__validateRequestType', 'clear', 'data', 'delete',
-    'errors', 'getError', 'getErrors', 'hasError', 'initial', 'onFail',
+    'errors', 'getError', 'getErrors', 'hasError', 'initial', 'onFail', 'only',
     'onSuccess', 'patch', 'populate', 'post', 'processing', 'successful',
     'put', 'reset', 'submit', 'withData', 'withErrors', 'withOptions',
 ];

@@ -86,6 +86,19 @@ class Form {
     }
 
     /**
+     * Fetch specific data for the form.
+     *
+     * @param {array} fields
+     * @return {object}
+     */
+    only(fields) {
+        return fields.reduce((filtered, field) => {
+            filtered[field] = this[field];
+            return filtered;
+        }, {});
+    }
+
+    /**
      * Reset the form fields.
      */
     reset() {

@@ -91,6 +91,9 @@ form.errors.clear();
 // Clear the error of the given field name or all errors on the given object
 form.errors.clear(key);
 
+// Returns an object containing fields based on the given array of field names
+form.only(keys);
+
 // Reset the values of the form to those passed to the constructor
 form.reset();
 
