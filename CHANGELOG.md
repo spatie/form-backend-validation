@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.2.0 - 2018-01-20
+- Added: `only` method
+
 ## 2.1.0 - 2017-11-21
 - Added: `successful` state property
 - Added: `populate` method to fill the form with values without overwriting the initial values
