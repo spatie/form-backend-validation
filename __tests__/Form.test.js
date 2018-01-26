@@ -229,7 +229,7 @@ describe('Form tests', () => {
         form.field1 = {
             foo: 'testFoo',
             bar: ['testBar1', 'testBar2'],
-            baz: new Date(2012, 3, 13, 4, 12),
+            baz: new Date(Date.UTC(2012, 3, 13, 2, 12)),
         };
         form.field2 = file;
 
