@@ -6,7 +6,7 @@ import { reservedFieldNames } from '../src/util';
 let form;
 let mockAdapter;
 
-describe('Errors', () => {
+describe('Form tests', () => {
 
     beforeEach(() => {
         form = new Form({
@@ -106,17 +106,17 @@ describe('Errors', () => {
     });
 
     it('can be populated with an object', () => {
-        form = new Form({ field: ''});
+        form = new Form({ field: '' });
 
-        form.populate({field: 'foo'});
+        form.populate({ field: 'foo' });
 
         expect(form.field).toBe('foo');
     });
 
     it('can\'t be populated with fields not present during instantiation', () => {
-        form = new Form({ field: ''});
+        form = new Form({ field: '' });
 
-        form.populate({field: 'foo', anotherField: 'baz'});
+        form.populate({ field: 'foo', anotherField: 'baz' });
 
         expect(form.anotherField).toBe(undefined);
     });
@@ -198,8 +198,6 @@ describe('Errors', () => {
     it('can accept a custom http instance in options', () => {
         const http = axios.create({ baseURL: 'http://anotherexample.com' });
 
-        mockAdapter = new MockAdapter(http);
-
         form = new Form({}, { http });
 
         expect(form.__http.defaults.baseURL).toBe('http://anotherexample.com');
@@ -207,6 +205,22 @@ describe('Errors', () => {
         form = new Form({});
 
         expect(form.__http.defaults.baseURL).toBe(undefined);
+    });
+
+    it('can override onSuccess and onFail methods by passing it in options', () => {
+        form = new Form({}, { onSuccess: () => 'foo', onFail: () => 'bar' });
+
+        expect(form.onSuccess()).toBe('foo');
+        expect(form.onFail()).toBe('bar');
+    });
+
+    it('can call directly HTTP verbs to submit', () => {
+        form.submit = (...args) => args;
+
+        expect(form.post('url')).toEqual(['post', 'url']);
+        expect(form.put('url')).toEqual(['put', 'url']);
+        expect(form.patch('url')).toEqual(['patch', 'url']);
+        expect(form.delete('url')).toEqual(['delete', 'url']);
     });
 
     it('transforms the data ta a FormData object if there is a File', async () => {
