@@ -9,7 +9,7 @@ class Errors {
     /**
      * Get all the errors.
      *
-     * @param {object} errors
+     * @return {object}
      */
     all() {
         return this.errors;
@@ -71,7 +71,7 @@ class Errors {
         }
 
         Object.keys(this.errors)
-              .filter(e => e === field || e.startsWith(`${field}.`))
+              .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
               .forEach(e => delete this.errors[e]);
     }
 }

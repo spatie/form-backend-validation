@@ -78,10 +78,13 @@ describe('Errors', () => {
             'person.last_name': ['Value is required'],
             'dates.0.start_date': ['Value is required'],
             'dates.1.start_date': ['Value is required'],
+            'roles[0].name':  ['Value is required'],
+            'roles[1].name':  ['Value is required'],
         });
 
         errors.clear('person');
         errors.clear('dates.0');
+        errors.clear('roles[1]');
 
         expect(errors.has('person')).toBe(false);
         expect(errors.has('person.first_name')).toBe(false);
@@ -90,6 +93,10 @@ describe('Errors', () => {
         expect(errors.has('dates')).toBe(true);
         expect(errors.has('dates.0.start_date')).toBe(false);
         expect(errors.has('dates.1.start_date')).toBe(true);
+
+        expect(errors.has('roles')).toBe(true);
+        expect(errors.has('roles[0].name')).toBe(true);
+        expect(errors.has('roles[1].name')).toBe(false);
     });
 
     it('can accept an object of errors in its constructor', () => {
