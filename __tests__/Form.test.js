@@ -6,7 +6,7 @@ import { reservedFieldNames } from '../src/util';
 let form;
 let mockAdapter;
 
-describe('Form tests', () => {
+describe('Form', () => {
     beforeEach(() => {
         form = new Form({
             field1: 'value 1',
@@ -233,7 +233,7 @@ describe('Form tests', () => {
         expect(form.delete('url')).toEqual(['delete', 'url']);
     });
 
-    it('transforms the data ta a FormData object if there is a File', async () => {
+    it('transforms the data to a FormData object if there is a File', async () => {
         const file = new File(['hello world!'], 'myfile');
 
         form.field1 = {
