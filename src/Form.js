@@ -65,8 +65,10 @@ class Form {
 
         this.__http = options.http || window.axios || require('axios');
 
-        if (! this.__http) {
-            throw new Error('No http library provided. Either pass an http option, or install axios.');
+        if (!this.__http) {
+            throw new Error(
+                'No http library provided. Either pass an http option, or install axios.'
+            );
         }
 
         return this;
@@ -114,7 +116,7 @@ class Form {
     }
 
     populate(data) {
-        Object.keys(data).forEach((field) => {
+        Object.keys(data).forEach(field => {
             guardAgainstReservedFieldName(field);
 
             if (this.hasOwnProperty(field)) {
@@ -185,14 +187,17 @@ class Form {
         this.successful = false;
 
         return new Promise((resolve, reject) => {
-            this.__http[requestType](url, this.hasFiles() ? objectToFormData(this.data()) : this.data())
-                .then((response) => {
+            this.__http[requestType](
+                url,
+                this.hasFiles() ? objectToFormData(this.data()) : this.data()
+            )
+                .then(response => {
                     this.processing = false;
                     this.onSuccess(response.data);
 
                     resolve(response.data);
                 })
-                .catch((error) => {
+                .catch(error => {
                     this.processing = false;
                     this.onFail(error);
 
@@ -270,13 +275,15 @@ class Form {
         const requestTypes = ['get', 'delete', 'head', 'post', 'put', 'patch'];
 
         if (requestTypes.indexOf(requestType) === -1) {
-            throw new Error(`\`${requestType}\` is not a valid request type, ` +
-                `must be one of: \`${requestTypes.join('\`, \`')}\`.`);
+            throw new Error(
+                `\`${requestType}\` is not a valid request type, ` +
+                    `must be one of: \`${requestTypes.join('`, `')}\`.`
+            );
         }
     }
 
     static create(data = {}) {
-        return (new Form()).withData(data);
+        return new Form().withData(data);
     }
 }
 

@@ -7,7 +7,6 @@ let form;
 let mockAdapter;
 
 describe('Form tests', () => {
-
     beforeEach(() => {
         form = new Form({
             field1: 'value 1',
@@ -105,7 +104,7 @@ describe('Form tests', () => {
         expect(form.field2).toBe('');
     });
 
-    it('can\'t be initialized with a reserved field name', () => {
+    it("can't be initialized with a reserved field name", () => {
         reservedFieldNames.forEach(fieldName => {
             expect(() => new Form({ [fieldName]: 'foo' })).toThrow();
         });
@@ -119,7 +118,7 @@ describe('Form tests', () => {
         expect(form.field).toBe('foo');
     });
 
-    it('can\'t be populated with fields not present during instantiation', () => {
+    it("can't be populated with fields not present during instantiation", () => {
         form = new Form({ field: '' });
 
         form.populate({ field: 'foo', anotherField: 'baz' });
@@ -127,7 +126,7 @@ describe('Form tests', () => {
         expect(form.anotherField).toBe(undefined);
     });
 
-    it('can\'t be populated with a reserved field name', () => {
+    it("can't be populated with a reserved field name", () => {
         reservedFieldNames.forEach(fieldName => {
             expect(() => new Form().populate({ [fieldName]: 'foo' })).toThrow();
         });
@@ -191,14 +190,19 @@ describe('Form tests', () => {
     });
 
     it('can get an error message for a field', () => {
-        form = Form.create({ field1: '', field2: '' })
-            .withErrors({ field1: [], field2: ['Field 2 is required', 'Field 2 must be an e-mail'] });
+        form = Form.create({ field1: '', field2: '' }).withErrors({
+            field1: [],
+            field2: ['Field 2 is required', 'Field 2 must be an e-mail'],
+        });
 
         expect(form.getError('field1')).toEqual(undefined);
         expect(form.getErrors('field1')).toEqual([]);
 
         expect(form.getError('field2')).toEqual('Field 2 is required');
-        expect(form.getErrors('field2')).toEqual(['Field 2 is required', 'Field 2 must be an e-mail']);
+        expect(form.getErrors('field2')).toEqual([
+            'Field 2 is required',
+            'Field 2 must be an e-mail',
+        ]);
     });
 
     it('can accept a custom http instance in options', () => {
@@ -239,7 +243,7 @@ describe('Form tests', () => {
         };
         form.field2 = file;
 
-        mockAdapter.onPost('http://example.com/posts').reply((request) => {
+        mockAdapter.onPost('http://example.com/posts').reply(request => {
             expect(request.data).toBeInstanceOf(FormData);
             expect(request.data.get('field1[foo]')).toBe('testFoo');
             expect(request.data.get('field1[bar][0]')).toBe('testBar1');

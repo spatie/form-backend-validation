@@ -23,10 +23,10 @@ class Errors {
     has(field) {
         let hasError = this.errors.hasOwnProperty(field);
 
-        if (! hasError) {
-            const errors = Object
-                .keys(this.errors)
-                .filter(e => e.startsWith(`${field}.`) || e.startsWith(`${field}[`));
+        if (!hasError) {
+            const errors = Object.keys(this.errors).filter(
+                e => e.startsWith(`${field}.`) || e.startsWith(`${field}[`)
+            );
 
             hasError = errors.length > 0;
         }
@@ -64,15 +64,15 @@ class Errors {
      * @param {string|null} field
      */
     clear(field) {
-        if (! field) {
+        if (!field) {
             this.errors = {};
 
             return;
         }
 
         Object.keys(this.errors)
-              .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
-              .forEach(e => delete this.errors[e]);
+            .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
+            .forEach(e => delete this.errors[e]);
     }
 }
 

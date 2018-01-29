@@ -3,7 +3,6 @@ import Errors from '../src/Errors';
 let errors;
 
 describe('Errors', () => {
-
     beforeEach(() => {
         errors = new Errors();
     });
@@ -11,7 +10,7 @@ describe('Errors', () => {
     it('can determine if there are any errors', () => {
         expect(errors.any()).toBe(false);
 
-        errors.record({ 'first_name': ['Value is required'] });
+        errors.record({ first_name: ['Value is required'] });
 
         expect(errors.any()).toBe(true);
     });
@@ -20,7 +19,7 @@ describe('Errors', () => {
         expect(errors.any()).toBe(false);
 
         errors.record({
-            'first_name': ['Value is required'],
+            first_name: ['Value is required'],
             'person.0.first_name': ['Value is required'],
         });
 
@@ -30,7 +29,7 @@ describe('Errors', () => {
     });
 
     it('can get all errors', () => {
-        const allErrors = { 'first_name': ['Value is required'] };
+        const allErrors = { first_name: ['Value is required'] };
 
         errors.record(allErrors);
 
@@ -40,7 +39,7 @@ describe('Errors', () => {
     it('can get a specific error', () => {
         expect(errors.any()).toBe(false);
 
-        errors.record({ 'first_name': ['Value is required'] });
+        errors.record({ first_name: ['Value is required'] });
 
         expect(errors.first('first_name')).toEqual('Value is required');
 
@@ -49,8 +48,8 @@ describe('Errors', () => {
 
     it('can clear all the errors', () => {
         errors.record({
-            'first_name': ['Value is required'],
-            'last_name': ['Value is required'],
+            first_name: ['Value is required'],
+            last_name: ['Value is required'],
         });
 
         expect(errors.any()).toBe(true);
@@ -62,8 +61,8 @@ describe('Errors', () => {
 
     it('can clear a specific error', () => {
         errors.record({
-            'first_name': ['Value is required'],
-            'last_name': ['Value is required'],
+            first_name: ['Value is required'],
+            last_name: ['Value is required'],
         });
 
         errors.clear('first_name');
@@ -78,8 +77,8 @@ describe('Errors', () => {
             'person.last_name': ['Value is required'],
             'dates.0.start_date': ['Value is required'],
             'dates.1.start_date': ['Value is required'],
-            'roles[0].name':  ['Value is required'],
-            'roles[1].name':  ['Value is required'],
+            'roles[0].name': ['Value is required'],
+            'roles[1].name': ['Value is required'],
         });
 
         errors.clear('person');

@@ -6,9 +6,9 @@
   "jsnext:main": "src/index.js",
   "scripts": {
     "build": "babel src -d dist",
-    "lint": "eslint --fix src __tests__; exit 0",
     "test": "jest",
-    "prepublish": "npm run test; npm run build"
+    "prepublish": "npm run test; npm run build",
+    "format": "prettier --write \"**/*.{css,js,vue}\""
   },
   "repository": {
     "type": "git",
@@ -45,5 +45,8 @@
   },
   "jest": {
     "testRegex": "test.js$"
+  },
+  "dependencies": {
+    "prettier": "^1.10.2"
   }
 }
