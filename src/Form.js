@@ -1,5 +1,5 @@
 import Errors from './Errors';
-import { guardAgainstReservedFieldName, isArray, merge, cloneDeep } from './util';
+import { guardAgainstReservedFieldName, isArray, merge, objectToFormData } from './util';
 
 class Form {
     /**
@@ -185,7 +185,7 @@ class Form {
         this.successful = false;
 
         return new Promise((resolve, reject) => {
-            this.__http[requestType](url, this.data())
+            this.__http[requestType](url, this.hasFiles() ? objectToFormData(this.data()) : this.data())
                 .then((response) => {
                     this.processing = false;
                     this.onSuccess(response.data);
@@ -199,6 +199,16 @@ class Form {
                     reject(error);
                 });
         });
+    }
+
+    hasFiles() {
+        for (const property in this.initial) {
+            if (this[property] instanceof File) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
