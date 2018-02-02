@@ -256,4 +256,23 @@ describe('Form', () => {
 
         await form.submit('post', 'http://example.com/posts');
     });
+
+    it('transforms the data to a FormData object if there is a multiple input File', async () => {
+        const file1 = new File(['hello world!'], 'myfile1');
+        const file2 = new File(['hello world!'], 'myfile2');
+
+        form.field1 = [file1, file2];
+        form.field1.__proto__ = Object.create(FileList.prototype);
+
+        mockAdapter.onPost('http://example.com/posts').reply(request => {
+            expect(request.data).toBeInstanceOf(FormData);
+            expect(request.data.get('field1[0]')).toEqual(file1);
+            expect(request.data.get('field1[1]')).toEqual(file2);
+            expect(request.data.get('field2')).toBe('value 2');
+
+            return [200, {}];
+        });
+
+        await form.submit('post', 'http://example.com/posts');
+    });
 });
