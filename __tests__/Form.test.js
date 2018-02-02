@@ -251,6 +251,13 @@ describe('Form', () => {
             expect(request.data.get('field1[baz]')).toBe('2012-04-13T02:12:00.000Z');
             expect(request.data.get('field2')).toEqual(file);
 
+            expect(getFormDataKeys(request.data)).toEqual([
+                'field1[foo]',
+                'field1[bar][0]',
+                'field1[bar][1]',
+                'field1[baz]',
+                'field2',
+            ]);
             return [200, {}];
         });
 
@@ -270,9 +277,19 @@ describe('Form', () => {
             expect(request.data.get('field1[1]')).toEqual(file2);
             expect(request.data.get('field2')).toBe('value 2');
 
+            expect(getFormDataKeys(request.data)).toEqual([
+                'field1[0]',
+                'field1[1]',
+                'field2',
+            ]);
             return [200, {}];
         });
 
         await form.submit('post', 'http://example.com/posts');
     });
 });
+
+function getFormDataKeys(formData) {
+    // This is because the FormData.keys() is missing from the jsdom implementations.
+    return formData[Object.getOwnPropertySymbols(formData)[0]]._entries.map(e => e.name);
+}
