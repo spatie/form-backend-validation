@@ -1,6 +1,8 @@
 export function objectToFormData(object, formData = new FormData(), parent = null) {
     for (const property in object) {
-        appendToFormData(formData, getKey(parent, property), object[property]);
+        if (object.hasOwnProperty(property)) {
+            appendToFormData(formData, getKey(parent, property), object[property]);
+        }
     }
 
     return formData;

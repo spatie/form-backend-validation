@@ -208,7 +208,7 @@ class Form {
 
     hasFiles() {
         for (const property in this.initial) {
-            if (this[property] instanceof File) {
+            if (this[property] instanceof File || this[property] instanceof FileList) {
                 return true;
             }
         }

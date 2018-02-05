@@ -251,9 +251,45 @@ describe('Form', () => {
             expect(request.data.get('field1[baz]')).toBe('2012-04-13T02:12:00.000Z');
             expect(request.data.get('field2')).toEqual(file);
 
+            expect(getFormDataKeys(request.data)).toEqual([
+                'field1[foo]',
+                'field1[bar][0]',
+                'field1[bar][1]',
+                'field1[baz]',
+                'field2',
+            ]);
+            return [200, {}];
+        });
+
+        await form.submit('post', 'http://example.com/posts');
+    });
+
+    it('transforms the data to a FormData object if there is a multiple input File', async () => {
+        const file1 = new File(['hello world!'], 'myfile1');
+        const file2 = new File(['hello world!'], 'myfile2');
+
+        form.field1 = [file1, file2];
+        form.field1.__proto__ = Object.create(FileList.prototype);
+
+        mockAdapter.onPost('http://example.com/posts').reply(request => {
+            expect(request.data).toBeInstanceOf(FormData);
+            expect(request.data.get('field1[0]')).toEqual(file1);
+            expect(request.data.get('field1[1]')).toEqual(file2);
+            expect(request.data.get('field2')).toBe('value 2');
+
+            expect(getFormDataKeys(request.data)).toEqual([
+                'field1[0]',
+                'field1[1]',
+                'field2',
+            ]);
             return [200, {}];
         });
 
         await form.submit('post', 'http://example.com/posts');
     });
 });
+
+function getFormDataKeys(formData) {
+    // This is because the FormData.keys() is missing from the jsdom implementations.
+    return formData[Object.getOwnPropertySymbols(formData)[0]]._entries.map(e => e.name);
+}
