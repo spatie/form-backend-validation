@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.1 - 2018-02-05
+- Fixed: Multi file uploads
+
 ## 2.3.0 - 2018-01-29
 - Added: Support for file uploads
 - Added: Support for array notation in `Errors.clear`
