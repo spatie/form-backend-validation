@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.2 - 2018-03-02
+- Fixed: Build script
+
 ## 2.3.1 - 2018-02-05
 - Fixed: Multi file uploads
 
