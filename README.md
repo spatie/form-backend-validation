@@ -87,7 +87,6 @@ form.getError(key);
 // Clear all errors
 form.errors.clear();
 
-
 // Clear the error of the given field name or all errors on the given object
 form.errors.clear(key);
 
@@ -106,6 +105,7 @@ const form = new Form({
     field1: '',
     field2: '',
 });
+
 form.populate({
     field1: 'foo',
     field2: 'bar',
@@ -154,6 +154,12 @@ method(url: string, data: Object): Promise<Response>
 Supported http methods are `get`, `delete`, `head`, `post`, `put` & `patch`.
 
 If you want to see how the http library is used internally, refer to the `Form` class' `submit` method.
+
+### Working with files
+
+The form handles file inputs too. The data is then sent as `FormData`, which means it's encoded as `multipart/form-data`.
+
+Some frameworks (like Laravel, Symfony) can't handle these incoming requests through other methods than `POST`, so you might need to take measures to work around this limitation. In Laravel or Symfony, that would mean adding a hidden `_method` field to your form containing the desired HTTP verb.
 
 ## Changelog
 
