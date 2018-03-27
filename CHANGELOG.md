@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.3 - 2018-03-27
+- Changed: Updated errors are now mutated instead of reassigned (fixes reactivity caveats)
+
 ## 2.3.2 - 2018-03-02
 - Fixed: Build script
 
