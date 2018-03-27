@@ -69,10 +69,14 @@ class Errors {
 
             return;
         }
+        
+        let errors = Object.assign({}, this.errors);
 
-        Object.keys(this.errors)
+        Object.keys(errors)
             .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
-            .forEach(e => delete this.errors[e]);
+            .forEach(e => delete errors[e]);
+        
+        this.errors = errors;
     }
 }
 
