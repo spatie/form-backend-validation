@@ -9,6 +9,7 @@ class Form {
      * @param {object} options
      */
     constructor(data = {}, options = {}) {
+        this.progress = 0;
         this.processing = false;
         this.successful = false;
 
@@ -189,7 +190,8 @@ class Form {
         return new Promise((resolve, reject) => {
             this.__http[requestType](
                 url,
-                this.hasFiles() ? objectToFormData(this.data()) : this.data()
+                this.hasFiles() ? objectToFormData(this.data()) : this.data(),
+                this.config()
             )
                 .then(response => {
                     this.processing = false;
@@ -214,6 +216,14 @@ class Form {
         }
 
         return false;
+    }
+    
+     config() {
+        return {
+            onUploadProgress: progressEvent => {
+                this.progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            }
+        }
     }
 
     /**
