@@ -45,7 +45,13 @@ class Errors {
     /**
      * Determine if we have any errors.
      */
-    any() {
+    any(keys = null) {
+        if (Array.isArray(keys)) {
+            keys.forEach((key) => {
+                return this.has(key);
+            });
+        }
+
         return Object.keys(this.errors).length > 0;
     }
 
