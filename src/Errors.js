@@ -45,8 +45,12 @@ class Errors {
     /**
      * Determine if we have any errors.
      */
-    any() {
-        return Object.keys(this.errors).length > 0;
+    any(fields = []) {
+        return Object.keys(this.errors)
+            .filter(field => {
+                // If user-provided `fields` is empty, don't filter the array.
+                return fields.length === 0 || fields.indexOf(field) >= 0
+            }).length > 0;
     }
 
     /**
@@ -69,13 +73,13 @@ class Errors {
 
             return;
         }
-        
+
         let errors = Object.assign({}, this.errors);
 
         Object.keys(errors)
             .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
             .forEach(e => delete errors[e]);
-        
+
         this.errors = errors;
     }
 }
