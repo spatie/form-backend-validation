@@ -15,6 +15,20 @@ describe('Errors', () => {
         expect(errors.any()).toBe(true);
     });
 
+    it('can determine if a given array has any errors', () => {
+        expect(errors.any(['first_name', 'last_name', 'email'])).toBe(false);
+
+        errors.record({ first_name: ['Value is required'] });
+
+        expect(errors.any(['first_name'])).toBe(true);
+
+        errors.record({ first_name: ['Value is required'], last_name: ['Value is required'] });
+
+        expect(errors.any(['email'])).toBe(false);
+        
+        expect(errors.any(['email', 'last_name'])).toBe(true);
+    });
+
     it('can determine if a given field or object has any errors', () => {
         expect(errors.any()).toBe(false);
 
