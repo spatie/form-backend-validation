@@ -46,11 +46,13 @@ class Errors {
      * Determine if we have any errors.
      */
     any(fields = []) {
+        if (fields.length === 0) {
+            return Object.keys(this.errors).length > 0;
+        }
+
         return Object.keys(this.errors)
-            .filter(field => {
-                // If user-provided `fields` is empty, don't filter the array.
-                return fields.length === 0 || fields.indexOf(field) >= 0
-            }).length > 0;
+            .filter(error_field => fields.indexOf(error_field) >= 0)
+            .length > 0;
     }
 
     /**
