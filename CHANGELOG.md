@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.3 - 2018-12-13
+- Changed: Checks now for the existence of window before trying to access axios of it
+
 ## 2.3.3 - 2018-03-27
 - Changed: Updated errors are now mutated instead of reassigned (fixes reactivity caveats)
 
