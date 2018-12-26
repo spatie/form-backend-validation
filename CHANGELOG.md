@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.5 - 2018-12-26
+- Fixed: Better support for arrays of objects
+
 ## 2.3.4 - 2018-12-13
 - Changed: Checks now for the existence of window before trying to access axios of it
 
