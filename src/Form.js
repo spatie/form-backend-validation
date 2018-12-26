@@ -1,5 +1,5 @@
 import Errors from './Errors';
-import { guardAgainstReservedFieldName, isArray, merge, objectToFormData } from './util';
+import { guardAgainstReservedFieldName, isArray, isFile, merge, objectToFormData } from './util';
 
 class Form {
     /**
@@ -208,14 +208,47 @@ class Form {
         });
     }
 
+    /**
+     * @returns {boolean}
+     */
     hasFiles() {
         for (const property in this.initial) {
-            if (this[property] instanceof File || this[property] instanceof FileList) {
+            if (this.hasFilesDeep(this[property])) {
                 return true;
             }
         }
 
         return false;
+    };
+
+    /**
+     * @param {Object|Array} object
+     * @returns {boolean}
+     */
+    hasFilesDeep(object) {
+        if (object === null) {
+            return false;
+        }
+
+        if (typeof object === 'object') {
+            for (const key in object) {
+                if (object.hasOwnProperty(key)) {
+                    if (isFile(object[key])) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        if (Array.isArray(object)) {
+            for (const key in object) {
+                if (object.hasOwnProperty(key)) {
+                    return this.hasFilesDeep(object[key]);
+                }
+            }
+        }
+
+        return isFile(object);
     }
 
     /**
