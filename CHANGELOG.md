@@ -2,6 +2,9 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.6 - 2018-01-03
+- Fixed: Build script
+
 ## 2.3.5 - 2018-12-26
 - Fixed: Better support for arrays of objects
 
