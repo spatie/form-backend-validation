@@ -1,6 +1,6 @@
 {
   "name": "form-backend-validation",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "An easy way to validate forms using back end logic",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
