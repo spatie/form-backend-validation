@@ -5,7 +5,7 @@
 [![Build Status](https://img.shields.io/travis/spatie/form-backend-validation/master.svg?style=flat-square)](https://travis-ci.org/spatie/form-backend-validation)
 [![npm](https://img.shields.io/npm/dt/form-backend-validation.svg?style=flat-square)](https://npmjs.com/package/form-backend-validation)
 
-Wouldn't it be great if you could just use your back end to validate forms on the front end? This package provides a `Form` class does exactly that. It can post itself to a configured endpoint and manage errors. The class meant to be used with a Laravel back end.
+Wouldn't it be great if you could just use your back end to validate forms on the front end? This package provides a `Form` class that does exactly that. It can post itself to a configured endpoint and manage errors. The class is meant to be used with a Laravel back end.
 
 Take a look at the [usage section](#usage) to view a detailed example on how to use it.
 
@@ -27,7 +27,7 @@ $ yarn add axios
 
 ## Usage
 
-You find an example implementation with Laravel and Vue in the [spatie/form-backend-validation-example-app repo](https://github.com/spatie/form-backend-validation-example-app).
+You can find an example implementation with Laravel and Vue in the [spatie/form-backend-validation-example-app repo](https://github.com/spatie/form-backend-validation-example-app).
 
 ![Screenshot](https://raw.githubusercontent.com/spatie/form-backend-validation-example-app/master/public/images/screenshot.png)
 
@@ -139,11 +139,11 @@ const form = Form.create()
 
 #### `resetOnSuccess: bool`
 
-Default: `true`. Set to `false` if you don't want the form to reset to it's original values after a succesfull submit.
+Default: `true`. Set to `false` if you don't want the form to reset to its original values after a succesful submit.
 
 #### `http: Object`
 
-By default this library uses axios for http request. If you want, you can roll with your own http library (or your own axios instance).
+By default this library uses `axios` for http request. If you want, you can roll with your own http library (or your own axios instance).
 
 *Advanced!* Pass a custom http library object. Your http library needs to adhere to the following interface for any http method you're using:
 
