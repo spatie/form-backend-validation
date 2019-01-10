@@ -2,6 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.7 - 2019-01-10
+
+- fix omitted empty values on submit
+
 ## 2.3.6 - 2018-01-03
 - Fixed: Build script
 
