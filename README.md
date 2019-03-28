@@ -16,13 +16,13 @@ The code of this package is based on the [Object-Oriented Forms lesson](https://
 You can install the package via yarn (or npm):
 
 ```bash
-$ yarn add form-backend-validation
+yarn add form-backend-validation
 ```
 
 By default, this package expects `axios` to be installed (unless you're using your own http library, see the [Options](#options) section for that).
 
 ```bash
-$ yarn add axios
+yarn add axios
 ```
 
 ## Usage
