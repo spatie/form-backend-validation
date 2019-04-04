@@ -99,7 +99,7 @@ form.reset();
 // Set the values which should be used when calling reset()
 form.setInitialValues();
 
-// Populate a form after its instantiation, the populated fields won't override the initial fields
+// Populate a form after its instantiation, the populated fields will override the initial fields
 // Fields not present at instantiation will not be populated
 const form = new Form({
     field1: '',
