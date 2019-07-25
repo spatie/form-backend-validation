@@ -287,6 +287,32 @@ describe('Form', () => {
 
         await form.submit('post', 'http://example.com/posts');
     });
+
+    it('transforms the boolean values in FormData object to "1" or "0"', async () => {
+        const file = new File(['hello world!'], 'myfile');
+
+        form.field1 = {
+            foo: true,
+            bar: false
+        };
+        form.field2 = file;
+
+        mockAdapter.onPost('http://example.com/posts').reply(request => {
+            expect(request.data).toBeInstanceOf(FormData);
+                expect(request.data.get('field1[foo]')).toBe('1');
+            expect(request.data.get('field1[bar]')).toBe('0');
+            expect(request.data.get('field2')).toEqual(file);
+
+            expect(getFormDataKeys(request.data)).toEqual([
+                'field1[foo]',
+                'field1[bar]',
+                'field2',
+            ]);
+            return [200, {}];
+        });
+
+        await form.submit('post', 'http://example.com/posts');
+    });
 });
 
 function getFormDataKeys(formData) {
