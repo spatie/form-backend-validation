@@ -2,6 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.8 - 2019-07-25
+
+- convert boolean values to 1 or 0 when using FormData
+
 ## 2.3.7 - 2019-01-10
 
 - fix omitted empty values on submit
