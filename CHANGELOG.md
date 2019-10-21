@@ -2,6 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.3.9 - 2019-10-21
+
+- convert `null` values to emptu strings when using FormData
+
 ## 2.3.8 - 2019-07-25
 
 - convert boolean values to 1 or 0 when using FormData
