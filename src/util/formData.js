@@ -29,6 +29,10 @@ function appendToFormData(formData, key, value) {
         return formData.append(key, value ? '1' : '0');
     }
 
+    if (value === null) {
+        return formData.append(key, '');
+    }
+    
     if (typeof value !== 'object') {
         return formData.append(key, value);
     }
