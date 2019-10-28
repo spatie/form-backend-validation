@@ -8,13 +8,13 @@ class Form {
      * @param {object} data
      * @param {object} options
      */
-    constructor(data = {}, options = {}) {
+    constructor(data = {}, options = {}, errors = {}) {
         this.processing = false;
         this.successful = false;
 
         this.withData(data)
             .withOptions(options)
-            .withErrors({});
+            .withErrors(errors);
     }
 
     withData(data) {

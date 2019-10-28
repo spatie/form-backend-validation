@@ -12,7 +12,7 @@ class Errors {
      * @return {object}
      */
     all() {
-        return this.errors;
+        return this;
     }
 
     /**
@@ -21,10 +21,10 @@ class Errors {
      * @param {string} field
      */
     has(field) {
-        let hasError = this.errors.hasOwnProperty(field);
+        let hasError = this.hasOwnProperty(field);
 
         if (!hasError) {
-            const errors = Object.keys(this.errors).filter(
+            const errors = Object.keys(this).filter(
                 e => e.startsWith(`${field}.`) || e.startsWith(`${field}[`)
             );
 
@@ -35,18 +35,21 @@ class Errors {
     }
 
     first(field) {
-        return this.get(field)[0];
+        if (this.has(field))
+            return this[field][0];
+        else
+            return undefined;
     }
 
     get(field) {
-        return this.errors[field] || [];
+        return this[field] || [];
     }
 
     /**
      * Determine if we have any errors.
      */
     any() {
-        return Object.keys(this.errors).length > 0;
+        return Object.keys(this).length > 0;
     }
 
     /**
@@ -55,7 +58,9 @@ class Errors {
      * @param {object} errors
      */
     record(errors = {}) {
-        this.errors = errors;
+        for (let error in errors) {
+            this[error] = errors[error];
+        }
     }
 
     /**
@@ -64,19 +69,19 @@ class Errors {
      * @param {string|null} field
      */
     clear(field) {
+        console.log('field',field);
         if (!field) {
-            this.errors = {};
+            var props = Object.keys(this);
+            for (var i = props.length - 1; i > -1; i--) {
+                delete this[props[i]];
+            }
 
             return;
         }
-        
-        let errors = Object.assign({}, this.errors);
 
-        Object.keys(errors)
+        Object.keys(this)
             .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
-            .forEach(e => delete errors[e]);
-        
-        this.errors = errors;
+            .forEach(e => delete this[e]);
     }
 }
 
