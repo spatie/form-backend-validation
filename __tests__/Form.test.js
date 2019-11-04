@@ -313,6 +313,28 @@ describe('Form', () => {
 
         await form.submit('post', 'http://example.com/posts');
     });
+
+    it('sends form data on delete requests', async () => {
+        const file = new File(['hello world!'], 'myfile');
+
+        form.field1 = 'foo';
+        form.field2 = file;
+
+        mockAdapter.onDelete('http://example.com/posts').reply(request => {
+            expect(request.data).toBeDefined();
+            expect(request.data).toBeInstanceOf(FormData);
+            expect(request.data.get('field1')).toBe('foo');
+            expect(request.data.get('field2')).toEqual(file);
+
+            expect(getFormDataKeys(request.data)).toEqual([
+                'field1',
+                'field2'
+            ]);
+            return [200, {}];
+        });
+
+        await form.submit('delete', 'http://example.com/posts');
+    });
 });
 
 function getFormDataKeys(formData) {

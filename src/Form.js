@@ -189,10 +189,11 @@ class Form {
         this.successful = false;
 
         return new Promise((resolve, reject) => {
-            this.__http[requestType](
+            this.__http.request({
                 url,
-                this.hasFiles() ? objectToFormData(this.data()) : this.data()
-            )
+                method: requestType,
+                data: this.hasFiles() ? objectToFormData(this.data()) : this.data(),
+            })
                 .then(response => {
                     this.processing = false;
                     this.onSuccess(response.data);
