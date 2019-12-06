@@ -233,7 +233,7 @@ class Form {
         if (typeof object === 'object') {
             for (const key in object) {
                 if (object.hasOwnProperty(key)) {
-                    if (isFile(object[key])) {
+                    if (this.hasFilesDeep(object[key])) {
                         return true;
                     }
                 }
