@@ -81,7 +81,7 @@ form.errors.first(key);
 // Returns an array with errors for the given field name
 form.errors.get(key);
 
-// Shortcut for getting the errors for the given field name
+// Shortcut for getting the first error for the given field name
 form.getError(key);
 
 // Clear all errors
