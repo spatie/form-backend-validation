@@ -111,4 +111,17 @@ describe('Errors', () => {
 
         expect(errors.all()).toEqual({});
     });
+
+    it('can pass array of keys to any method and get back error of specified key', () => {
+        errors = new Errors({
+            'first_name': ['This field is required'],
+            'last_name': ['This field is required'],
+            'age': ['This field is required'],
+        });
+
+        expect(errors.any(['first_name', 'last_name'])).toEqual({
+            'first_name': ['This field is required'],
+            'last_name': ['This field is required'],
+        });
+    });
 });
