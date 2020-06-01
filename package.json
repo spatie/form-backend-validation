@@ -39,12 +39,12 @@
     "babel-plugin-transform-async-to-generator": "^6.16.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-es2015": "^6.9.0",
-    "jest": "^21.0.0"
+    "jest": "^21.0.0",
+    "prettier": "^1.10.2"
   },
   "jest": {
     "testRegex": "test.js$"
   },
   "dependencies": {
-    "prettier": "^1.10.2"
   }
 }
