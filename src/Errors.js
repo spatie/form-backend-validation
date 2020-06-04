@@ -44,9 +44,20 @@ class Errors {
 
     /**
      * Determine if we have any errors.
+     * Or return errors for the given keys.
+     *
+     * @param {array} keys
      */
-    any() {
-        return Object.keys(this.errors).length > 0;
+    any(keys = []) {
+        if (keys.length === 0) {
+            return Object.keys(this.errors).length > 0;
+        }
+
+        let errors = {};
+
+        keys.forEach(key => errors[key] = this.get(key));
+
+        return errors;
     }
 
     /**
@@ -69,13 +80,13 @@ class Errors {
 
             return;
         }
-        
+
         let errors = Object.assign({}, this.errors);
 
         Object.keys(errors)
             .filter(e => e === field || e.startsWith(`${field}.`) || e.startsWith(`${field}[`))
             .forEach(e => delete errors[e]);
-        
+
         this.errors = errors;
     }
 }

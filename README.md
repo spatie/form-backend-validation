@@ -82,6 +82,9 @@ form.errors.all();
 // Returns true if there were any error
 form.errors.any();
 
+// Returns object with errors for the specified keys in array.
+form.errors.any(keys);
+
 // Returns true if there is an error for the given field name or object
 form.errors.has(key);
 
