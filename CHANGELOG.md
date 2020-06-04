@@ -2,6 +2,10 @@
 
 All notable changes to `form-backend-validation` will be documented in this file
 
+## 2.4.0 - 2020-06-04
+
+- added `form.errors.any` method
+
 ## 2.3.9 - 2019-10-21
 
 - convert `null` values to emptu strings when using FormData
