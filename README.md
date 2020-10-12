@@ -13,7 +13,7 @@ The code of this package is based on the [Object-Oriented Forms lesson](https://
 
 ## Support us
 
-[![Image](https://github-ads.s3.eu-central-1.amazonaws.com/form-backend-validation.jpg)](https://spatie.be/github-ad-click/form-backend-validation)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/form-backend-validation.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/form-backend-validation)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
