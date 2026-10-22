@@ -1,6 +1,4 @@
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
 # An easy way to validate forms using back end logic
 
 [![Latest Version on NPM](https://img.shields.io/npm/v/form-backend-validation.svg?style=flat-square)](https://npmjs.com/package/form-backend-validation)
@@ -16,7 +14,7 @@ The code of this package is based on the [Object-Oriented Forms lesson](https://
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/form-backend-validation.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/form-backend-validation)
+[<img src="https://spatie.be/github-ad-image/form-backend-validation.jpg" width="419px" />](https://spatie.be/github-ad-click/form-backend-validation)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
